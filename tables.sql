@@ -15,6 +15,7 @@ CREATE TABLE item (
     item_name VARCHAR(100),
     price DOUBLE,
     made_in VARCHAR(50),
+    department VARCHAR(50),
     store_name VARCHAR(50)
 )
 
