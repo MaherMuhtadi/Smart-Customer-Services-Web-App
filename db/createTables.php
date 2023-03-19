@@ -15,6 +15,7 @@ catch (Exception $e) {
     echo "No old tables to drop.<br>";
 }
 
+// Creating new tables
 $create_commands = file_get_contents("tables.sql");
 try {
     mysqli_multi_query($connection, $create_commands);
