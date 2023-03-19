@@ -29,7 +29,7 @@ function menuBar() {
             <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
             <button class='menu-item' onclick=\"window.open('services.php', '_self')\">Types of Services</button>
             <button class='menu-item' onclick=\"window.open('cart.php', '_self')\">Shopping Cart</button>
-            <button class='menu-item' onclick=\"window.open('login.php', '_self')\">Sign Out</button>
+            <button class='menu-item negative-button' onclick=\"window.open('login.php', '_self')\">Sign Out</button>
         </header>";
 }
 

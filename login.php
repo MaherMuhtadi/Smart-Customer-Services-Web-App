@@ -122,7 +122,7 @@ elseif (isset($_POST["signin"])) {
 
                 <div>
                     <button name="signup" type="submit">Sign Up</button>
-                    <button type="reset">Clear</button>
+                    <button class="negative-button" type="reset">Clear</button>
                 </div>
             </form>
 
@@ -141,7 +141,7 @@ elseif (isset($_POST["signin"])) {
 
                 <div>
                     <button name="signin" type="submit">Sign In</button>
-                    <button type="reset">Clear</button>
+                    <button class="negative-button" type="reset">Clear</button>
                 </div>
             </form>
         </div>
