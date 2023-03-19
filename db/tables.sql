@@ -1,10 +1,3 @@
--- Dropping existing instance of the tables
-DROP TABLE receipt;
-DROP TABLE trip;
-DROP TABLE user;
-DROP TABLE truck;
-DROP TABLE item;
-
 -- Stores all user accounts
 CREATE TABLE user (
     user_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
