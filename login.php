@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "db/connect.php";
 
 unset($_SESSION["user_id"]);
@@ -78,7 +79,7 @@ elseif (isset($_POST['signin'])) {
 <body>
     
     <header>
-        <img class="menu-item" src="images/logo.png" alt="logo">
+        <img style="width: 15%" src="images/logo.png" alt="logo">
     </header>
 
     <main>
