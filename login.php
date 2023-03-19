@@ -1,6 +1,9 @@
 <?php
-include "connect.php";
+include "db/connect.php";
 
+unset($_SESSION["user_id"]);
+
+// If Sign Up button is clicked, add the user info to the database
 if (isset($_POST['signup'])) {
     unset($_POST["signup"]);
     $insert_user = 
@@ -22,6 +25,7 @@ if (isset($_POST['signup'])) {
     }
 }
 
+// If Sign In button is clicked, check if user info exists in the database
 elseif (isset($_POST['signin'])) {
     unset($_POST["signin"]);
     $search_user = "SELECT user_id, login_id, password FROM user WHERE login_id = '"
