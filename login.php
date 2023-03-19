@@ -14,10 +14,22 @@
 
     <style>
         form {
-            width: 50%;
+            width: 40%;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            row-gap: 0.5rem;
+        }
+        input {
+            width: 60%;
         }
         #login_forms {
             display: flex;
+            justify-content: space-between;
+        }
+        .input {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -35,42 +47,64 @@
             <form method="post">
                 <h2>New user? Register below</h2>
 
-                <label for="login_id1">Username:</label>
-                <input id="login_id1" name="login_id" type="text">
+                <div class="input">
+                    <label for="login_id1">Username:</label>
+                    <input id="login_id1" name="login_id" type="text" maxlength="50">
+                </div>
 
-                <label for="password1">Password:</label>
-                <input id="password1" name="password" type="password">
+                <div class="input">
+                    <label for="password1">Password:</label>
+                    <input id="password1" name="password" type="password" maxlength="50">
+                </div>
                 
-                <label for="first_name">First Name:</label>
-                <input id="first_name" name="first_name" type="text">
+                <div class="input">
+                    <label for="first_name">First Name:</label>
+                    <input id="first_name" name="first_name" type="text" maxlength="50">
+                </div>
                 
-                <label for="last_name">Last Name:</label>
-                <input id="last_name" name="last_name" type="text">
+                <div class="input">
+                    <label for="last_name">Last Name:</label>
+                    <input id="last_name" name="last_name" type="text" maxlength="50">
+                </div>
                 
-                <label for="tel_no">Phone:</label>
-                <input id="tel_no" name="tel_no" type="tel">
+                <div class="input">
+                    <label for="tel_no">Phone:</label>
+                    <input id="tel_no" name="tel_no" type="tel" maxlength="12">
+                </div>
                 
-                <label for="email">Email:</label>
-                <input id="email" name="email" type="email">
+                <div class="input">
+                    <label for="email">Email:</label>
+                    <input id="email" name="email" type="email" maxlength="100">
+                </div>
 
-                <label for="address">Address:</label>
-                <input id="address" name="address" type="text">
+                <div class="input">
+                    <label for="address">Address:</label>
+                    <input id="address" name="address" type="text" maxlength="200">
+                </div>
 
-                <button name="signup" type="submit">Sign Up</button>
-                <button type="reset">Clear</button>
+                <div>
+                    <button name="signup" type="submit">Sign Up</button>
+                    <button type="reset">Clear</button>
+                </div>
             </form>
 
             <form method="post">
                 <h2>Already have an account? Sign in below</h2>
 
-                <label for="login_id2">Username:</label>
-                <input id="login_id2" name="login_id" type="text">
+                <div class="input">
+                    <label for="login_id2">Username:</label>
+                    <input id="login_id2" name="login_id" type="text" maxlength="50">
+                </div>
 
-                <label for="password2">Password:</label>
-                <input id="password2" name="password" type="password">
+                <div class="input">
+                    <label for="password2">Password:</label>
+                    <input id="password2" name="password" type="password" maxlength="50">
+                </div>
 
-                <button name="signin" type="submit">Sign In</button>
-                <button type="reset">Clear</button>
+                <div>
+                    <button name="signin" type="submit">Sign In</button>
+                    <button type="reset">Clear</button>
+                </div>
             </form>
         </div>
     </main>
