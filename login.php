@@ -1,11 +1,13 @@
 <?php
 session_start();
 include "db/connect.php";
+include "layout.php";
 
+// Sign the user out whenever the user comes to the login page
 unset($_SESSION["user_id"]);
 
 // If Sign Up button is clicked, add the user info to the database
-if (isset($_POST['signup'])) {
+if (isset($_POST["signup"])) {
     unset($_POST["signup"]);
     $insert_user = 
         "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address)
@@ -23,11 +25,12 @@ if (isset($_POST['signup'])) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION["user_id"] = $row["user_id"];
         header("Location: home.php");
+        exit();
     }
 }
 
 // If Sign In button is clicked, check if user info exists in the database
-elseif (isset($_POST['signin'])) {
+elseif (isset($_POST["signin"])) {
     unset($_POST["signin"]);
     $search_user = "SELECT user_id, login_id, password FROM user WHERE login_id = '"
         .$_POST["login_id"]."'"
@@ -38,6 +41,7 @@ elseif (isset($_POST['signin'])) {
         $row = mysqli_fetch_assoc($result);
         $_SESSION["user_id"] = $row["user_id"];
         header("Location: home.php");
+        exit();
     }
 }
 ?>
@@ -45,36 +49,28 @@ elseif (isset($_POST['signin'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="UTF-8">
-    <title>Smart Customer Services</title>
+<?php htmlHead(); ?>
 
-    <link rel="icon" href="images/icon.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Electrolize">
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        form {
-            width: 40%;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            row-gap: 0.5rem;
-        }
-        input {
-            width: 60%;
-        }
-        #login_forms {
-            display: flex;
-            justify-content: space-between;
-        }
-        .input {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
-</head>
+<style>
+    form {
+        width: 40%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
+    }
+    input {
+        width: 60%;
+    }
+    #login_forms {
+        display: flex;
+        justify-content: space-between;
+    }
+    .input {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
 
 <body>
     
@@ -151,27 +147,7 @@ elseif (isset($_POST['signin'])) {
         </div>
     </main>
 
-    <footer>
-        <div class="footer-item">
-            Our Team:
-            <ul>
-                <li>Maher Muhtadi</li>
-                <li>Edward Sword</li>
-                <li>Arshpreet Singh</li>
-                <li>James Tan</li>
-            </ul>
-        </div>
-        
-        <div class="footer-item">
-            Contacts:
-            <ul>
-                <li>mmuhtadi@torontomu.ca</li>
-                <li>edward.sword@torontomu.ca</li>
-                <li>arshpreet.singh@torontomu.ca</li>
-                <li>russelljames.tan@torontomu.ca</li>
-            </ul>
-        </div>
-    </footer>
+    <?php footer(); ?>
 
 </body>
 
