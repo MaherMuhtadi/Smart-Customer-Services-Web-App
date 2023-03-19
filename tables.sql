@@ -28,7 +28,7 @@ CREATE TABLE user (
     last_name VARCHAR(50),
     tel_no VARCHAR(12),
     email VARCHAR(100),
-    address VARCHAR(50),
+    address VARCHAR(200),
     balance DOUBLE DEFAULT 0.00
 )
 
