@@ -1,4 +1,41 @@
-<?php include "connect.php"; ?>
+<?php
+include "connect.php";
+
+if (isset($_POST['signup'])) {
+    unset($_POST["signup"]);
+    $insert_user = 
+        "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address)
+            VALUES ('"
+            .$_POST["login_id_new"]."', '"
+            .$_POST["password_new"]."', '"
+            .$_POST["first_name"]."', '"
+            .$_POST["last_name"]."', '"
+            .$_POST["tel_no"]."', '"
+            .$_POST["email"]."', '"
+            .$_POST["address"]."')";
+    mysqli_query($connection, $insert_user);
+    $result = mysqli_query($connection, "SELECT user_id, email FROM user WHERE email = '".$_POST["email"]."'");
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION["user_id"] = $row["user_id"];
+        header("Location: home.php");
+    }
+}
+
+elseif (isset($_POST['signin'])) {
+    unset($_POST["signin"]);
+    $search_user = "SELECT user_id, login_id, password FROM user WHERE login_id = '"
+        .$_POST["login_id"]."'"
+        ." AND password = "
+        ."'".$_POST["password"]."'";
+    $result = mysqli_query($connection, $search_user);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION["user_id"] = $row["user_id"];
+        header("Location: home.php");
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +86,12 @@
 
                 <div class="input">
                     <label for="login_id1">Username:</label>
-                    <input id="login_id1" name="login_id" type="text" maxlength="50">
+                    <input id="login_id1" name="login_id_new" type="text" maxlength="50">
                 </div>
 
                 <div class="input">
                     <label for="password1">Password:</label>
-                    <input id="password1" name="password" type="password" maxlength="50">
+                    <input id="password1" name="password_new" type="password" maxlength="50">
                 </div>
                 
                 <div class="input">

@@ -13,7 +13,7 @@ CREATE TABLE user (
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     tel_no VARCHAR(12),
-    email VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
     address VARCHAR(200),
     balance DOUBLE DEFAULT 0.00
 );
