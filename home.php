@@ -27,9 +27,7 @@ $user = $_SESSION["user"];
         transform: scale(1.1);
     }
     .info {
-        width: 92%;
         border-radius: 1rem;
-        margin-left: 8%;
         display: flex;
         align-items: center;
     }
