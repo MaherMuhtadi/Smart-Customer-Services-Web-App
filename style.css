@@ -59,20 +59,27 @@ a:hover {
     text-decoration: underline;
 }
 
+#menu-row {
+    width: 70%;
+    text-align: end;
+}
+
+.menu-item {
+    width: 10%;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+.footer-item {
+    padding: 1rem;
+}
+
 .negative-button {
     background-color: rgb(218,55,60);
 }
 
 .negative-button:hover {
     background-color: rgb(180, 45, 50);
-}
-
-.menu-item {
-    width: 10%;
-}
-
-.footer-item {
-    padding: 1rem;
 }
 
 .info {

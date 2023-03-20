@@ -23,13 +23,15 @@ function menuBar() {
         "<header>
             <img style='width: 15%' src='images/logo.png' alt='logo'>
 
-            <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
-            <button class='menu-item' onclick=\"window.open('about.php', '_self')\">About us</button>
-            <button class='menu-item' onclick=\"window.open('contact.php', '_self')\">Contact us</button>
-            <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
-            <button class='menu-item' onclick=\"window.open('services.php', '_self')\">Types of Services</button>
-            <button class='menu-item' onclick=\"window.open('cart.php', '_self')\">Shopping Cart</button>
-            <button class='menu-item negative-button' onclick=\"window.open('login.php', '_self')\">Sign Out</button>
+            <div id='menu-row'>
+                <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
+                <button class='menu-item' onclick=\"window.open('about.php', '_self')\">About us</button>
+                <button class='menu-item' onclick=\"window.open('contact.php', '_self')\">Contact us</button>
+                <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
+                <button class='menu-item' onclick=\"window.open('browse.php', '_self')\">Browse</button>
+                <button class='menu-item' onclick=\"window.open('cart.php', '_self')\">Cart</button>
+                <button class='menu-item negative-button' onclick=\"window.open('login.php', '_self')\">Sign Out</button>
+            </div>
         </header>";
 }
 
