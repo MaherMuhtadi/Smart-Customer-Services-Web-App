@@ -20,8 +20,8 @@ include "layout.php";
         <h1>Happy Shopping!</h1>
         <table>
             <tr>
-                <th>Image</th>
                 <th>ID</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Origin</th>
@@ -33,10 +33,10 @@ include "layout.php";
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo
-                        "<tr><td><img src='".$row["img_path"]."'></td>"
-                        ."<td>".$row["item_id"]."</td>"
+                        "<tr><td>".$row["item_id"]."</td>"
+                        ."<td><img src='".$row["img_path"]."'></td>"
                         ."<td>".$row["item_name"]."</td>"
-                        ."<td>".$row["price"]."</td>"
+                        ."<td>".$row["price"]." CAD</td>"
                         ."<td>".$row["made_in"]."</td>"
                         ."<td>".$row["department"]."</td>"
                         ."<td>".$row["store_name"]."</td></tr>";
