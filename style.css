@@ -50,6 +50,15 @@ button:hover {
     background-color: rgb(72, 82, 197);
 }
 
+a {
+    color: rgb(2,163,243);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .negative-button {
     background-color: rgb(218,55,60);
 }
