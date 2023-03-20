@@ -30,6 +30,18 @@ main {
     margin: 10% 5% 5% 5%;
 }
 
+table {
+    border: 2px solid whitesmoke;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    height: 2rem;
+    text-align: center;
+    border: 2px solid whitesmoke;
+}
+
 input, button {
     padding: 0.5rem;
     border: transparent;
