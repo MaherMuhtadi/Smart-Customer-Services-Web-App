@@ -4,26 +4,38 @@ include "db/connect.php";
 include "layout.php";
 
 // Sign the user out whenever the user comes to the login page
-unset($_SESSION["user_id"]);
+unset($_SESSION["user"]);
 
 // If Sign Up button is clicked, add the user info to the database
 if (isset($_POST["signup"])) {
     unset($_POST["signup"]);
+
+    $user = ["login_id"=>$_POST["login_id_new"],
+             "password"=>$_POST["password_new"],
+             "first_name"=>$_POST["first_name"],
+             "last_name"=>$_POST["last_name"],
+             "tel_no"=>$_POST["tel_no"],
+             "email"=>$_POST["email"],
+             "address"=>$_POST["address"],
+             "balance"=>0.00];
+
     $insert_user = 
         "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address)
             VALUES ('"
-            .$_POST["login_id_new"]."', '"
-            .$_POST["password_new"]."', '"
-            .$_POST["first_name"]."', '"
-            .$_POST["last_name"]."', '"
-            .$_POST["tel_no"]."', '"
-            .$_POST["email"]."', '"
-            .$_POST["address"]."')";
+            .$user["login_id"]."', '"
+            .$user["password"]."', '"
+            .$user["first_name"]."', '"
+            .$user["last_name"]."', '"
+            .$user["tel_no"]."', '"
+            .$user["email"]."', '"
+            .$user["address"]."')";
     mysqli_query($connection, $insert_user);
-    $result = mysqli_query($connection, "SELECT user_id, email FROM user WHERE email = '".$_POST["email"]."'");
+
+    $result = mysqli_query($connection, "SELECT user_id, email FROM user WHERE email = '".$user["email"]."'");
+    
     if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION["user_id"] = $row["user_id"];
+        $user["user_id"] = mysqli_fetch_assoc($result)["user_id"];
+        $_SESSION["user"] = $user;
         header("Location: home.php");
         exit();
     }
@@ -32,23 +44,33 @@ if (isset($_POST["signup"])) {
 // If Sign In button is clicked, check if user info exists in the database
 elseif (isset($_POST["signin"])) {
     unset($_POST["signin"]);
-    $search_user = "SELECT user_id, login_id, password FROM user WHERE login_id = '"
+    
+    $search_user = "SELECT user_id, login_id, password, first_name, last_name, tel_no, email, address, balance
+        FROM user WHERE login_id = '"
         .$_POST["login_id"]."'"
         ." AND password = "
         ."'".$_POST["password"]."'";
     $result = mysqli_query($connection, $search_user);
+    
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $_SESSION["user_id"] = $row["user_id"];
+        $user = ["user_id"=>$row["user_id"],
+                 "login_id"=>$row["login_id"],
+                 "password"=>$row["password"],
+                 "first_name"=>$row["first_name"],
+                 "last_name"=>$row["last_name"],
+                 "tel_no"=>$row["tel_no"],
+                 "email"=>$row["email"],
+                 "address"=>$row["address"],
+                 "balance"=>$row["balance"]];
+        $_SESSION["user"] = $user;
         header("Location: home.php");
         exit();
     }
 }
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
-
 <?php htmlHead(); ?>
 
 <style>
@@ -150,5 +172,4 @@ elseif (isset($_POST["signin"])) {
     <?php footer(); ?>
 
 </body>
-
 </html>
