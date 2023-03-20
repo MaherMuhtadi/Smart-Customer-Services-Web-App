@@ -17,7 +17,7 @@ if (isset($_POST["submitted"])) {
         $insert_item = 
             "INSERT INTO item (img_path, item_name, price, made_in, department, store_name)
                 VALUES ('"
-                .$path."', '"
+                .substr($path, 3)."', '"
                 .$_POST["item_name"]."', '"
                 .$_POST["price"]."', '"
                 .$_POST["made_in"]."', '"
