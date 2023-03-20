@@ -42,6 +42,7 @@ CREATE TABLE receipt (
 -- Stores all purchasable items
 CREATE TABLE item (
     item_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    img_path VARCHAR(100),
     item_name VARCHAR(100),
     price DOUBLE,
     made_in VARCHAR(50),
