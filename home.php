@@ -16,8 +16,8 @@ $user = $_SESSION["user"];
     #idcard {
         position: absolute;
         z-index: 1;
-        width: 30%;
-        padding: 2rem;
+        width: 25%;
+        padding: 1rem;
         border: 1px solid rgb(63,65,71);
         border-radius: 1rem;
         background-color: rgb(43,45,49);
@@ -27,6 +27,7 @@ $user = $_SESSION["user"];
         transform: scale(1.1);
     }
     .info {
+        width: 100%;
         border-radius: 1rem;
         display: flex;
         align-items: center;
@@ -40,11 +41,11 @@ $user = $_SESSION["user"];
     <main>
         <div id='idcard'>
             <h1>Welcome <?php echo $user["login_id"]."#".$user["user_id"]; ?>!</h1>
-            Your current balance is <?php echo $user["balance"]; ?>
+            <p>Your current balance is <?php echo $user["balance"]; ?></p>
         </div>
 
         <div class='info'>
-            <img src='https://www.scamwatch.gov.au/sites/www.scamwatch.gov.au/files/type-of-scam-images/online-shopping.png' alt='Online Shopping'>
+            <img width="50%" src='images/home_art.png' alt='Online Shopping'>
             <div>
                 <h1>Why SCS?</h1>
                 <p>Smart Customer Services (SCS) is an online system that aims to plan for smart green
