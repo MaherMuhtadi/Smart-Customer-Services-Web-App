@@ -6,6 +6,7 @@ echo "Connected to database successfully.<br>";
 try {
     mysqli_query($connection, "DROP TABLE receipt");
     mysqli_query($connection, "DROP TABLE trip");
+    mysqli_query($connection, "DROP TABLE review");
     mysqli_query($connection, "DROP TABLE user");
     mysqli_query($connection, "DROP TABLE truck");
     mysqli_query($connection, "DROP TABLE item");

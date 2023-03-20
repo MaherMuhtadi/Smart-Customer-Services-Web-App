@@ -49,3 +49,11 @@ CREATE TABLE item (
     department VARCHAR(50),
     store_name VARCHAR(50)
 );
+
+-- Stores all user reviews
+CREATE TABLE review (
+    review_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id MEDIUMINT REFERENCES user(user_id) ON DELETE CASCADE,
+    login_id VARCHAR(50) REFERENCES user(login_id) ON DELETE CASCADE,
+    feedback VARCHAR(300)
+);

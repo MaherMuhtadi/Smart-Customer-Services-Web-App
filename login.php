@@ -79,7 +79,6 @@ elseif (isset($_POST["signin"])) {
         padding: 1rem;
         display: flex;
         flex-direction: column;
-        row-gap: 0.5rem;
     }
     input {
         width: 60%;

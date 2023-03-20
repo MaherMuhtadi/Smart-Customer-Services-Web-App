@@ -46,13 +46,17 @@ td > img {
     width: 100%;
 }
 
-input, button {
+form {
+    row-gap: 0.5rem;
+}
+
+input, button, textarea {
     padding: 0.5rem;
     border: transparent;
     color: whitesmoke;
 }
 
-input {
+input, textarea {
     border-radius: 0.25rem;
     background-color: rgb(30,31,34);
 }
