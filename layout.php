@@ -24,8 +24,8 @@ function menuBar() {
             <img style='width: 15%' src='images/logo.png' alt='logo'>
 
             <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
-            <button class='menu-item' onclick=\"\">About us</button>
-            <button class='menu-item' onclick=\"\">Contact us</button>
+            <button class='menu-item' onclick=\"window.open('about.php', '_self')\">About us</button>
+            <button class='menu-item' onclick=\"window.open('contact.php', '_self')\">Contact us</button>
             <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
             <button class='menu-item' onclick=\"window.open('services.php', '_self')\">Types of Services</button>
             <button class='menu-item' onclick=\"window.open('cart.php', '_self')\">Shopping Cart</button>
