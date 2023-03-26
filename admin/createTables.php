@@ -10,6 +10,7 @@ try {
     mysqli_query($connection, "DROP TABLE user");
     mysqli_query($connection, "DROP TABLE truck");
     mysqli_query($connection, "DROP TABLE item");
+    mysqli_query($connection, "DROP TABLE store");
     echo "All old tables were dropped successfully.<br>";
 }
 catch (Exception $e) {
