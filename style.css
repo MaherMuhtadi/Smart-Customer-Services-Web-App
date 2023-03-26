@@ -88,8 +88,35 @@ a:hover {
 }
 
 #menu-row {
-    width: 70%;
-    text-align: end;
+    width: 80%;
+    display: flex;
+    justify-content: right;
+}
+
+#dropdown {
+    position: absolute;
+    width: 8%;
+    border-radius: 0.5rem;
+    background-color: rgb(88,101,242);
+}
+
+#dropdown > * {
+    width: 100%;
+    background-color: rgb(88,101,242);
+    text-align: center;
+}
+
+#dropdown-menu {
+    display: none;
+    padding-top: 1rem;
+    border-radius: 0.5rem;
+}
+
+#dropdown:hover #dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
 }
 
 .tiles {
