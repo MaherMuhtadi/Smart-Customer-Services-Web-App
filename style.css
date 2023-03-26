@@ -108,7 +108,7 @@ a:hover {
 
 #dropdown-menu {
     display: none;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     border-radius: 0.5rem;
 }
 

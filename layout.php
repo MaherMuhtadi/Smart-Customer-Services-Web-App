@@ -33,7 +33,7 @@ function menuBar() {
                 
                 <div class='menu-item'>
                     <div id='dropdown'>
-                        <button>Services</button>
+                        <button style='text-decoration:underline'>Services</button>
                         <div id='dropdown-menu'>
                             <button style='border-radius:0' onclick=\"window.open('browse.php', '_self')\">Browse</button>
                             <button style='border-radius:0' onclick=\"window.open('cart.php', '_self')\">Cart</button>
