@@ -12,6 +12,8 @@ function htmlHead() {
             <link rel='icon' href='images/icon.png'>
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Electrolize'>
             <link rel='stylesheet' href='style.css'>
+            <script src='https://code.jquery.com/jquery-3.6.4.min.js' integrity='sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=' crossorigin='anonymous'></script>
+            <script src='shopCart.js'></script>
         </head>";
 }
 

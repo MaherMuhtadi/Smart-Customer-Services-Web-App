@@ -4,6 +4,9 @@ if (!isset($_SESSION["user"])) {
     header("Location: login.php");
     exit();
 }
+if (!isset($_SESSION["shopping_cart"])){
+    $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
+}
 
 include "db/connect.php";
 include "layout.php";
@@ -12,12 +15,23 @@ include "layout.php";
 <html lang='en'>
 <?php htmlHead(); ?>
 
+<style>
+    .tiles {
+        margin-top: 1rem;
+    }
+    .items {
+        cursor: move;
+    }
+</style>
+
 <body>
 
     <?php menuBar(); ?>
     
     <main>
         <h1>Happy Shopping!</h1>
+        <h2>Drag and drop to add to cart</h2>
+
         <table>
             <tr>
                 <th>ID</th>
@@ -33,8 +47,8 @@ include "layout.php";
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo
-                        "<tr><td>".$row["item_id"]."</td>"
-                        ."<td><img src='".$row["img_path"]."'></td>"
+                        "<tr id='".$row["item_id"]."' class='items' draggable=true><td>".$row["item_id"]."</td>"
+                        ."<td><img src='".$row["img_path"]."' draggable=false></td>"
                         ."<td>".$row["item_name"]."</td>"
                         ."<td>".$row["price"]." CAD</td>"
                         ."<td>".$row["made_in"]."</td>"
@@ -44,6 +58,12 @@ include "layout.php";
             }
             ?>
         </table>
+
+        <div class="tiles" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+            <h2>Shopping Cart</h2>
+            <div width="100%" id="shopping-cart" onclick="window.open('cart.php', '_self')"></div>
+            <button class="negative-button" onclick="clearCart()">Clear</button>
+        </div>
     </main>
     
     <?php footer(); ?>

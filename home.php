@@ -13,18 +13,8 @@ $user = $_SESSION["user"];
 <?php htmlHead(); ?>
 
 <style>
-    #idcard {
+    .tiles {
         position: absolute;
-        z-index: 1;
-        width: 25%;
-        padding: 1rem;
-        border: 1px solid rgb(63,65,71);
-        border-radius: 1rem;
-        background-color: rgb(43,45,49);
-        transition: all 200ms;
-    }
-    #idcard:hover {
-        transform: scale(1.1);
     }
     .info {
         width: 100%;
@@ -39,7 +29,7 @@ $user = $_SESSION["user"];
     <?php menuBar(); ?>
     
     <main>
-        <div id='idcard'>
+        <div class='tiles'>
             <h1>Welcome <?php echo $user["login_id"]."#".$user["user_id"]; ?>!</h1>
             <p>Your current balance is <?php echo $user["balance"]; ?></p>
         </div>
