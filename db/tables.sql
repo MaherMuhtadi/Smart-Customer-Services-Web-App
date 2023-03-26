@@ -43,7 +43,7 @@ CREATE TABLE receipt (
 CREATE TABLE item (
     item_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     img_path VARCHAR(100) UNIQUE,
-    item_name VARCHAR(100),
+    item_name VARCHAR(100) UNIQUE,
     price DOUBLE,
     made_in VARCHAR(50),
     department VARCHAR(50),
