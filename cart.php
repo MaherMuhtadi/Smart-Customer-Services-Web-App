@@ -9,7 +9,7 @@ if (!isset($_SESSION['shopping_cart'])){
 }
 $items = $_SESSION['shopping_cart']['items'];
 
-include "db/connect.php";
+include "admin/connect.php";
 include "layout.php";
 ?>
 

@@ -8,7 +8,7 @@ if (!isset($_SESSION["shopping_cart"])){
     $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
 }
 
-include "db/connect.php";
+include "admin/connect.php";
 include "layout.php";
 ?>
 

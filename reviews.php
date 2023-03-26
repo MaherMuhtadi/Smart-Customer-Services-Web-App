@@ -6,7 +6,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 include "layout.php";
-include "db/connect.php";
+include "admin/connect.php";
 
 if (isset($_POST["submitted"])) {
     unset($_POST["submitted"]);

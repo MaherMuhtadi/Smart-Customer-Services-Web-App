@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db/connect.php";
+include "admin/connect.php";
 include "layout.php";
 
 // Sign the user out whenever the user comes to the login page
