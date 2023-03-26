@@ -60,7 +60,8 @@ include "layout.php";
         <?php
             echo "<h2 style='text-align:right'>Total: ".$_SESSION['shopping_cart']['total_cost']." CAD</h2>";
         ?>
-        <button class="negative-button" onclick="clearCart()">Clear</button>
+        <button onclick="window.open('delivery.php', '_self')">Checkout</button>
+        <button class="negative-button" onclick="clearCart(); location.reload()">Clear</button>
     </main>
     
     <?php footer(); ?>

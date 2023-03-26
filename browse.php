@@ -61,7 +61,7 @@ include "layout.php";
 
         <div class="tiles" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
             <h2>Shopping Cart</h2>
-            <div width="100%" id="shopping-cart" onclick="window.open('cart.php', '_self')"></div>
+            <div width="100%" id="shopping-cart" onclick="window.open('cart.php', '_self')"></div><br>
             <button class="negative-button" onclick="clearCart()">Clear</button>
         </div>
     </main>
