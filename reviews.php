@@ -67,7 +67,7 @@ if (isset($_POST["submitted"])) {
             <tr>
                 <th>User</th>
                 <th>Date</th>
-                <th style="width:90%">Feedback</th>
+                <th style="width:70%">Feedback</th>
             </tr>
             <?php
             $result = mysqli_query($connection, "SELECT login_id, user_id, feedback, date_posted FROM review");

@@ -26,6 +26,9 @@ include "layout.php";
             if (count($cart["items"]) == 0) {
                 echo "<h2>You have nothing to be delivered</h2>";
             }
+            else {
+                echo "<h2>How would you like for your items to be delivered?</h2>";
+            }
         ?>
     </main>
 
