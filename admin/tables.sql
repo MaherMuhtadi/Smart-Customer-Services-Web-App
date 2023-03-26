@@ -39,12 +39,6 @@ CREATE TABLE receipt (
     trip_id MEDIUMINT REFERENCES trip(trip_id) ON DELETE CASCADE
 );
 
--- Stores all store information
-CREATE TABLE store (
-    store_name VARCHAR(50) PRIMARY KEY,
-    warehouse_address VARCHAR(200)
-);
-
 -- Stores all purchasable items
 CREATE TABLE item (
     item_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +47,7 @@ CREATE TABLE item (
     price DOUBLE,
     made_in VARCHAR(50),
     department VARCHAR(50),
-    store_name VARCHAR(50) REFERENCES store(store_name) ON DELETE CASCADE
+    store_name VARCHAR(50)
 );
 
 -- Stores all user reviews
