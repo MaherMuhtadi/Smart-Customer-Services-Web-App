@@ -17,7 +17,7 @@ function dropHandler(ev) {
 
 function refreshCart() {
     /**
-     * sends POST request to postToCart.php to refresh shopping cart session
+     * Sends POST request to postToCart.php to refresh shopping cart session
      * and updates the shopping card tile on the webpage
      */
     $.post("postToCart.php", {cart_action:"get_contents"}, function(res) {
@@ -36,14 +36,14 @@ function refreshCart() {
 
 function clearCart() {
     /**
-     * sends POST request to postToCart.php to clear shopping cart session
+     * Sends POST request to postToCart.php to clear shopping cart session
      */
     $.post("postToCart.php", {cart_action: "clear"}, refreshCart);
 }
 
 function listenDragstart() {
     /**
-     * adds "dragstart" event listener to every element of class "items"
+     * Adds "dragstart" event listener to every element of class "items"
      * and attaches the dragstartHandler function as the event handler
      */
     let items = document.getElementsByClassName("items");
@@ -53,7 +53,7 @@ function listenDragstart() {
 }
 
 /**
- * restores shopping cart information and 
+ * Restores shopping cart information and 
  * adds drag event listener and handler to items displayed in browse.php
  * only if the page loaded is browse.php
  */
