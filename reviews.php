@@ -59,7 +59,17 @@ if (isset($_POST["submitted"])) {
             <textarea id="feedback" name="feedback" rows="4" maxlength="300"></textarea>
 
             <label for="item_name">Item purchased:</label>
-            <input id="item_name" name="item_name" type="text" maxlength="100">
+            <select id="item_name" name="item_name">
+                <option selected disabled>Pick an item to review</option>
+                <?php
+                    $result = mysqli_query($connection, "SELECT item_name FROM item");
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='".$row["item_name"]."'>".$row["item_name"]."</option>";
+                        }
+                    }
+                ?>
+            </select>
 
             <label for="rating">Rating:</label>
             <div>
