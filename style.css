@@ -58,15 +58,19 @@ form {
     row-gap: 0.5rem;
 }
 
-input, button, textarea {
+input, button, textarea, select {
     padding: 0.5rem;
     border: transparent;
     color: whitesmoke;
 }
 
-input, textarea {
+input, textarea, select {
     border-radius: 0.25rem;
     background-color: rgb(30,31,34);
+}
+
+label {
+    font-weight: bold;
 }
 
 button {
