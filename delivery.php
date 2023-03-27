@@ -18,12 +18,12 @@ include "layout.php";
 <?php htmlHead(); ?>
 
 <style>
-    #map {
-	    width: 40vw;
-        height: 40vw;
-		margin: auto;
-	}
-    
+    #map-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     #map-form {
         width: 40%;
         padding: 1rem;
@@ -37,8 +37,22 @@ include "layout.php";
         justify-content: space-between;
     }
 
+    #map {
+	    width: 30vw;
+        height: 30vw;
+		margin: auto;
+	}
+
+    #info {
+        text-align: end;
+    }
+
     input, select {
         width: 70%;
+    }
+
+    button {
+        width: fit-content;
     }
 </style>
 
@@ -60,23 +74,28 @@ include "layout.php";
 
         <h2>How would you like for your items to be delivered?</h2>
 
-        <div id="map-form">
-            <div id="map-input">
-                <label for="destination">Deliver to:</label>
-                <input id="destination" type="text" value="<?php echo $user["address"]; ?>" maxlength="200">
+        <div id="map-container">
+            <div id="map-form">
+                <div id="map-input">
+                    <label for="destination">Deliver to:</label>
+                    <input id="destination" type="text" value="<?php echo $user["address"]; ?>" maxlength="200">
+                </div>
+                
+                <div id="map-input">
+                    <label for="source">Warehouse:</label>
+                    <select id="source">
+                        <option value="789 Salem Rd N, Ajax, ON L1Z 1G1">789 Salem Rd N, Ajax, ON L1Z 1G1</option>
+                        <option value="150 Kingston Rd E, Ajax, ON L1Z 1E5">150 Kingston Rd E, Ajax, ON L1Z 1E5</option>
+                    </select>
+                </div>
+
+                <button onclick="initMap()">Generate Map</button>
             </div>
             
-            <div id="map-input">
-                <label for="source">Warehouse:</label>
-                <select id="source">
-                    <option value="789 Salem Rd N, Ajax, ON L1Z 1G1">789 Salem Rd N, Ajax, ON L1Z 1G1</option>
-                    <option value="150 Kingston Rd E, Ajax, ON L1Z 1E5">150 Kingston Rd E, Ajax, ON L1Z 1E5</option>
-                </select>
-            </div>
+            <div id="map"></div>
         </div>
-        <button onclick="initMap()">Generate Map</button>
         
-        <div id="map"></div>
+        <div id="info"></div>
     </main>
 
     <?php footer(); ?>
