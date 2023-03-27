@@ -47,6 +47,18 @@ if (isset($_POST["truck_submitted"])) {
         echo "Failed to add truck.<br>";
     }
 }
+
+// Processes warehouse submission
+if (isset($_POST["warehouse_submitted"])) {
+    unset($_POST["warehouse_submitted"]);
+
+    if (mysqli_query($connection, "INSERT INTO warehouse (address) VALUES ('".$_POST["address"]."')")) {
+        echo $_POST["address"]." added successfully.<br>";
+    }
+    else {
+        echo "Failed to add warehouse.<br>";
+    }
+}
 ?>
 <form enctype='multipart/form-data' method='post'>
     <p>Add an item to SCS Database:<p>
@@ -80,5 +92,15 @@ if (isset($_POST["truck_submitted"])) {
     <input id="truck_code" name="truck_code" maxlength="50">
     
     <button name="truck_submitted" type="submit">Add Truck</button>
+    <button type="reset">Clear</button>
+</form>
+
+<form method="post">
+    <p>Add a warehouse to SCS Database:<p>
+    
+    <label for="address">Warehouse address:</label>
+    <input id="address" name="address" maxlength="200">
+    
+    <button name="warehouse_submitted" type="submit">Add warehouse</button>
     <button type="reset">Clear</button>
 </form>

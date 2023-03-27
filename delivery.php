@@ -12,6 +12,7 @@ $KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI";
 $user = $_SESSION["user"];
 $cart = $_SESSION["shopping_cart"];
 include "layout.php";
+include "admin/connect.php"
 ?>
 
 <html lang='en'>
@@ -84,8 +85,15 @@ include "layout.php";
                 <div id="map-input">
                     <label for="source">Warehouse:</label>
                     <select id="source">
-                        <option value="789 Salem Rd N, Ajax, ON L1Z 1G1">789 Salem Rd N, Ajax, ON L1Z 1G1</option>
-                        <option value="150 Kingston Rd E, Ajax, ON L1Z 1E5">150 Kingston Rd E, Ajax, ON L1Z 1E5</option>
+                        <?php
+                            $result = mysqli_query($connection, "SELECT * FROM warehouse");
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo
+                                        "<option value='".$row["address"]."'>".$row["address"]."</option>";
+                                }
+                            }
+                        ?>
                     </select>
                 </div>
 
