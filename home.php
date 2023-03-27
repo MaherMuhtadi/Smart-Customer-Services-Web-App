@@ -15,6 +15,7 @@ $user = $_SESSION["user"];
 <style>
     .tiles {
         position: absolute;
+        right: 10%;
     }
     .info {
         width: 100%;
