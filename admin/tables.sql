@@ -15,14 +15,14 @@ CREATE TABLE user (
 CREATE TABLE truck (
     truck_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     truck_code VARCHAR(50),
-    availability_code TINYINT(1)
+    availability_code TINYINT(1) DEFAULT 1
 );
 
 -- Stores all delivery trips
 CREATE TABLE trip (
     trip_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    source_code VARCHAR(50),
-    destination_code VARCHAR(50),
+    source VARCHAR(200),
+    destination VARCHAR(200),
     distance DOUBLE,
     truck_id MEDIUMINT REFERENCES truck(truck_id) ON DELETE CASCADE,
     price DOUBLE
