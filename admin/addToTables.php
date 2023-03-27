@@ -3,15 +3,16 @@ include "connect.php";
 echo "Connected to database successfully.<br>";
 
 // Processes item submission
-if (isset($_POST["submitted"])) {
-    unset($_POST["submitted"]);
+if (isset($_POST["item_submitted"])) {
+    unset($_POST["item_submitted"]);
 
     // Downloads file to the server if it is png or jpg
     $img = $_FILES["img"];
     $path = "../images/items/".$img["name"];
     $validExt = array("jpg", "png");
     $validMime = array("image/jpeg","image/png");
-	$extension = end(explode(".", $img["name"]));
+	$name_array = explode(".", $img["name"]);
+    $extension = end($name_array);
 	if (in_array($img["type"], $validMime) && in_array($extension, $validExt)) {
         move_uploaded_file($img['tmp_name'], $path);
         $insert_item = 
@@ -24,15 +25,27 @@ if (isset($_POST["submitted"])) {
                 .$_POST["department"]."', '"
                 .$_POST["store_name"]."')";
         if (mysqli_query($connection, $insert_item)) {
-            echo $_POST["item_name"]." added successfully.";
+            echo $_POST["item_name"]." added successfully.<br>";
         }
         else {
-            echo "Failed to add item.";
+            echo "Failed to add item.<br>";
         }
 	}
 	else {
-		echo "Invalid file!";
+		echo "Invalid file!<br>";
 	}
+}
+
+// Processes truck submission
+if (isset($_POST["truck_submitted"])) {
+    unset($_POST["truck_submitted"]);
+
+    if (mysqli_query($connection, "INSERT INTO truck (truck_code) VALUES ('".$_POST["truck_code"]."')")) {
+        echo $_POST["truck_code"]." added successfully.<br>";
+    }
+    else {
+        echo "Failed to add truck.<br>";
+    }
 }
 ?>
 <form enctype='multipart/form-data' method='post'>
@@ -56,6 +69,16 @@ if (isset($_POST["submitted"])) {
     <label for="store_name">Store:</label>
     <input id="store_name" name="store_name" type="text"  maxlength="50"><br>
 
-    <button name="submitted" type="submit">Add Item</button>
+    <button name="item_submitted" type="submit">Add Item</button>
+    <button type="reset">Clear</button>
+</form>
+
+<form method="post">
+    <p>Add a delivery truck to SCS Database:<p>
+    
+    <label for="truck_code">Truck Code:</label>
+    <input id="truck_code" name="truck_code" maxlength="50">
+    
+    <button name="truck_submitted" type="submit">Add Truck</button>
     <button type="reset">Clear</button>
 </form>
