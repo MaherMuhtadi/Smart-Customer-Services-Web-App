@@ -55,6 +55,14 @@ CREATE TABLE review (
     review_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id MEDIUMINT REFERENCES user(user_id) ON DELETE CASCADE,
     login_id VARCHAR(50) REFERENCES user(login_id) ON DELETE CASCADE,
+    item_name VARCHAR(100) REFERENCES item(item_name) ON DELETE CASCADE,
     feedback VARCHAR(300),
-    date_posted DATE
+    rating TINYINT,
+    date_posted DATE,
+    CHECK (rating>=1 AND rating<=5)
 );
+
+-- Stores all SCS warehouses
+CREATE TABLE warehouse (
+    address VARCHAR(200) PRIMARY KEY
+)
