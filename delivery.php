@@ -51,7 +51,7 @@ include "layout.php";
         width: 70%;
     }
 
-    button {
+    #generate-button {
         width: fit-content;
     }
 </style>
@@ -89,7 +89,7 @@ include "layout.php";
                     </select>
                 </div>
 
-                <button onclick="initMap()">Generate Map</button>
+                <button id="generate-button" onclick="initMap()">Generate Map</button>
             </div>
             
             <div id="map"></div>

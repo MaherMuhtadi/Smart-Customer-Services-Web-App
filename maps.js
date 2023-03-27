@@ -1,27 +1,28 @@
-const KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI"; //Google Maps API Key
+const KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI"; // Google Maps API Key
 
 async function initMap() {
     /**
-     * generates the map and calculates the distance
+     * Generates the map with route and calculates the distance
      */
-    var dst = await geocode(document.getElementById("destination").value);
-    var map = new google.maps.Map(document.getElementById("map"), {zoom: 13, center: dst});
-    var marker = new google.maps.Marker({position: dst, map: map});    
-    var infoWindow = new google.maps.InfoWindow({content: "<span style='color:black'>You</span>"});
-    marker.addListener("click", function() {infoWindow.open(map, marker);});
+    var src = document.getElementById("source").value;
+    var dst = document.getElementById("destination").value;
+    
+    // Creates the map with destination geocode
+    var dst_geocode = await geocode(dst);
+    var map = new google.maps.Map(document.getElementById("map"), {zoom: 15, center: dst_geocode});
 
-    var src = await geocode(document.getElementById("source").value);
-    var marker2 = new google.maps.Marker({position: src, map: map});
-    var infoWindow2 = new google.maps.InfoWindow({content: "<span style='color:black'>Warehouse</span>"});
-    marker2.addListener("click", function() {infoWindow2.open(map, marker2);});
+    // Generates directions
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+    calculateAndDisplayRoute(directionsService, directionsRenderer, src, dst);
 
-    getDistance(src, dst);
+    getDistance(src, dst); // Calculates distance
 }
 
 async function geocode(address) {
     /**
-     * takes the string address
-     * returns the lat-lng object
+     * Takes the string address returns the lat-lng object
      */
     var latlng;
     await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${KEY}`)
@@ -35,10 +36,29 @@ async function geocode(address) {
     return latlng;
 }
 
+function calculateAndDisplayRoute(directionsService, directionsRenderer, src, dst) {
+    /**
+     * Takes the directions service and renderer objects, the source and destination strings
+     * and generates the route
+     */
+    directionsService.route({
+        origin: {
+            query: src,
+        },
+        destination: {
+          query: dst,
+        },
+        travelMode: google.maps.TravelMode.DRIVING,
+    })
+    .then((response) => {
+        directionsRenderer.setDirections(response);
+    })
+    .catch((e) => console.log("Directions request failed due to " + e));
+}
+
 function getDistance(src, dst) {
     /**
-     * takes the lat-lng values of source and destination
-     * writes the distance data to HTML
+     * Takes the lat-lng values of source and destination writes the distance data to HTML
      */
     var service = new google.maps.DistanceMatrixService();
     var matrixOptions = {
