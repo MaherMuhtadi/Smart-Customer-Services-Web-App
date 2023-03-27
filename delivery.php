@@ -11,6 +11,7 @@ if (!isset($_SESSION["shopping_cart"])){
 $KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI";
 $user = $_SESSION["user"];
 $cart = $_SESSION["shopping_cart"];
+
 include "layout.php";
 include "admin/connect.php"
 ?>

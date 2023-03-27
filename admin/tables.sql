@@ -33,6 +33,7 @@ CREATE TABLE receipt (
     receipt_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date_issued DATETIME,
     date_delivered DATETIME DEFAULT NULL,
+    items VARCHAR(300),
     total_price DOUBLE,
     payment VARCHAR(16),
     user_id MEDIUMINT REFERENCES user(user_id) ON DELETE CASCADE,
