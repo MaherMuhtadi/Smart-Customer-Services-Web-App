@@ -13,11 +13,13 @@ if (isset($_POST["submitted"])) {
 
     $datetime = date("Y-m-d");
     $insert_review = 
-            "INSERT INTO review (user_id, login_id, feedback, date_posted)
+            "INSERT INTO review (user_id, login_id, item_name, feedback, rating, date_posted)
                 VALUES ('"
                 .$_SESSION["user"]["user_id"]."', '"
                 .$_SESSION["user"]["login_id"]."', '"
+                .$_POST["item_name"]."', '"
                 .$_POST["feedback"]."', '"
+                .$_POST["rating"]."', '"
                 .$datetime."')";
         mysqli_query($connection, $insert_review);
 }
@@ -38,7 +40,7 @@ if (isset($_POST["submitted"])) {
         border: none;
     }
     th, td {
-        width: 15%;
+        width: 12%;
         padding: 1rem;
         border-width: 1px 0px 1px 0px;
     }
@@ -56,6 +58,15 @@ if (isset($_POST["submitted"])) {
             <label for="feedback">Your Feedback:</label>
             <textarea id="feedback" name="feedback" rows="4" maxlength="300"></textarea>
 
+            <label for="item_name">Item purchased:</label>
+            <input id="item_name" name="item_name" type="text" maxlength="100">
+
+            <label for="rating">Rating:</label>
+            <div>
+                <input style="width:50%" id="rating" name="rating" type="range" min="1" step="1" max="5" oninput="this.nextElementSibling.innerHTML=this.value">
+                <div>3</div>
+            </div>
+
             <div>
                 <button name="submitted" type="submit">Post</button>
                 <button class="negative-button" type="reset">Clear</button>
@@ -65,18 +76,22 @@ if (isset($_POST["submitted"])) {
         <h2>Feedback from other people</h2>
         <table>
             <tr>
-                <th>User</th>
                 <th>Date</th>
-                <th style="width:70%">Feedback</th>
+                <th>User</th>
+                <th>Item</th>
+                <th>Rating</th>
+                <th style="width:50%">Feedback</th>
             </tr>
             <?php
-            $result = mysqli_query($connection, "SELECT login_id, user_id, feedback, date_posted FROM review");
+            $result = mysqli_query($connection, "SELECT login_id, user_id, item_name, feedback, rating, date_posted FROM review");
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo
-                        "<tr><td>".$row["login_id"]."#".$row["user_id"]."</td>"
-                        ."<td>".$row["date_posted"]."</td>"
-                        ."<td style='width:70%'>".$row["feedback"]."</td></tr>";
+                        "<tr><td>".$row["date_posted"]."</td>"
+                        ."<td>".$row["login_id"]."#".$row["user_id"]."</td>"
+                        ."<td>".$row["item_name"]."</td>"
+                        ."<td>".$row["rating"]."</td>"
+                        ."<td style='width:50%'>".$row["feedback"]."</td></tr>";
                 }
             }
             ?>
