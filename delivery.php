@@ -48,7 +48,7 @@ include "admin/connect.php"
         text-align: end;
     }
 
-    input, select {
+    input[type=text], select {
         width: 70%;
     }
 
@@ -98,12 +98,27 @@ include "admin/connect.php"
                 </div>
 
                 <button id="generate-button" onclick="initMap()">Generate Map</button>
+
+                <?php
+                    $date = date("Y-m-d");
+                    echo
+                        "<div style='line-height:2rem'><div id='map-input'>"
+                        ."<label for='option_1'>Standard delivery:</label>"
+                        ."<div><input id='option_1' name='delivery' type='radio' checked>"
+                        .date('Y-m-d', strtotime($date.' + 3 days'))."</div></div>";
+                    echo 
+                        "<div id='map-input'>"
+                        ."<label for='option_2'>Express delivery:</label>"
+                        ."<div><input id='option_2' name='delivery' type='radio'>"
+                        .date('Y-m-d', strtotime($date.' + 1 days'))."</div></div></div>";
+                ?>
+                
+                <div id="info" class="info"></div>
+                <button onclick="payRedirect()">Proceed to Pay</button>
             </div>
             
             <div id="map"></div>
         </div>
-        
-        <div id="info"></div>
     </main>
 
     <?php footer(); ?>
@@ -111,6 +126,14 @@ include "admin/connect.php"
 </body>
 
 <script src='maps.js'></script>
+<script type="text/Javascript">
+    function payRedirect() {
+        let src = document.getElementById("source").value;
+        let dst = document.getElementById("destination").value;
+        let url = `payment.php?src=${src}&dst=${dst}&distance=${distance}&fee=${fee}`;
+        window.open(url, "_self");
+    }
+</script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo $KEY; ?>&callback=initMap"></script>
 
 </html>

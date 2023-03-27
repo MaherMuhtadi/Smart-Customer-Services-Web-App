@@ -1,5 +1,8 @@
 const KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI"; // Google Maps API Key
 
+var distance = 0;
+var fee = 0;
+
 async function initMap() {
     /**
      * Generates the map with route and calculates the distance
@@ -76,6 +79,10 @@ function getDistance(src, dst) {
             console.log("Error with distance matrix");
             return;
         }
-        document.getElementById("info").innerHTML = "Distance: " + response.rows[0].elements[0].distance.text;
+        distance = parseFloat(response.rows[0].elements[0].distance.text.split(" ")[0]);
+        fee = (0.75*response.rows[0].elements[0].distance.value*0.001).toFixed(2);
+        document.getElementById("info").innerHTML = 
+            "Distance: " + distance + " km<br>"
+            +"Delivery fee: " + fee + " CAD";
     }
 }
