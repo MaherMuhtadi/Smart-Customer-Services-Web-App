@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
+    echo "<h1>Access Denied!</h1>";
+    exit();
+}
+
 include "connect.php";
 echo "Connected to database successfully.<br>";
 
