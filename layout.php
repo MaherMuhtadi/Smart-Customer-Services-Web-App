@@ -58,7 +58,7 @@ function menuBar() {
                     <div id='admin-dropdown'>
                         <button style='text-decoration:underline'>Maintain</button>
                         <div id='admin-dropdown-menu'>
-                            <button style='border-radius:0' onclick=\"window.open('', '_self')\">Insert</button>
+                            <button style='border-radius:0' onclick=\"window.open('admin/insert.php')\">Insert</button>
                             <button style='border-radius:0' onclick=\"window.open('', '_self')\">Delete</button>
                             <button style='border-radius:0' onclick=\"window.open('', '_self')\">Select</button>
                             <button style='border-top-right-radius:0;border-top-left-radius:0' onclick=\"window.open('', '_self')\">Update</button>

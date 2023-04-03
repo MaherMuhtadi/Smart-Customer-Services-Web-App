@@ -6,7 +6,6 @@ if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
 }
 
 include "connect.php";
-echo "Connected to database successfully.<br>";
 
 // Processes item submission
 if (isset($_POST["item_submitted"])) {
@@ -66,8 +65,11 @@ if (isset($_POST["warehouse_submitted"])) {
     }
 }
 ?>
+
+<h1>Insert new data to SCS Database</h1>
+
 <form enctype='multipart/form-data' method='post'>
-    <p>Add an item to SCS Database:<p>
+    <h2>Add an item:</h2>
 
     <label for="img">Image:</label>
     <input id="img" name="img" type="file"><br>
@@ -92,7 +94,7 @@ if (isset($_POST["warehouse_submitted"])) {
 </form>
 
 <form method="post">
-    <p>Add a delivery truck to SCS Database:<p>
+    <h2>Add a delivery truck:</h2>
     
     <label for="truck_code">Truck Code:</label>
     <input id="truck_code" name="truck_code" maxlength="50">
@@ -102,7 +104,7 @@ if (isset($_POST["warehouse_submitted"])) {
 </form>
 
 <form method="post">
-    <p>Add a warehouse to SCS Database:<p>
+    <h2>Add a warehouse:</h2>
     
     <label for="address">Warehouse address:</label>
     <input id="address" name="address" maxlength="200">
