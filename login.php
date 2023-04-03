@@ -36,6 +36,10 @@ if (isset($_POST["signup"])) {
     if (mysqli_num_rows($result) > 0) {
         $user["user_id"] = mysqli_fetch_assoc($result)["user_id"];
         $_SESSION["user"] = $user;
+        if ($_POST["previous_page"] != "") {
+            header("Location: ".$_POST["previous_page"]);
+            exit();
+        }
         header("Location: home.php");
         exit();
     }
@@ -64,6 +68,10 @@ elseif (isset($_POST["signin"])) {
                  "address"=>$row["address"],
                  "balance"=>$row["balance"]];
         $_SESSION["user"] = $user;
+        if ($_POST["previous_page"] != "") {
+            header("Location: ".$_POST["previous_page"]);
+            exit();
+        }
         header("Location: home.php");
         exit();
     }
@@ -97,6 +105,17 @@ elseif (isset($_POST["signin"])) {
     
     <header>
         <img style="width: 15%" src="images/logo.png" alt="logo">
+        <div>
+            <?php
+                if (isset($_POST["previous_page"]) and $_POST["previous_page"] != "") {
+                    echo "<button onclick=\"window.open('".$_POST["previous_page"]."', '_self')\">Back</button>";
+                }
+                elseif (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], "login.php") == false) {
+                    echo "<button onclick=\"window.open('".$_SERVER['HTTP_REFERER']."', '_self')\">Back</button>";
+                }
+            ?>
+            <button onclick="window.open('home.php', '_self')">Home</button>
+        </div>
     </header>
 
     <main>
@@ -141,6 +160,16 @@ elseif (isset($_POST["signin"])) {
                     <input id="address" name="address" type="text" maxlength="200">
                 </div>
 
+                <?php
+                    if (isset($_POST["previous_page"])) {
+                        echo "<input hidden name='previous_page' value='".$_POST["previous_page"]."'>";
+                    }
+                    else {
+                        $previous = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
+                        echo "<input hidden name='previous_page' value='".$previous."'>";
+                    }
+                ?>
+
                 <div>
                     <button name="signup" type="submit">Sign Up</button>
                     <button class="negative-button" type="reset">Clear</button>
@@ -159,6 +188,16 @@ elseif (isset($_POST["signin"])) {
                     <label for="password2">Password:</label>
                     <input id="password2" name="password" type="password" maxlength="50">
                 </div>
+
+                <?php
+                    if (isset($_POST["previous_page"])) {
+                        echo "<input hidden name='previous_page' value='".$_POST["previous_page"]."'>";
+                    }
+                    else {
+                        $previous = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
+                        echo "<input hidden name='previous_page' value='".$previous."'>";
+                    }
+                ?>
 
                 <div>
                     <button name="signin" type="submit">Sign In</button>
