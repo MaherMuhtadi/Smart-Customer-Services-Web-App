@@ -97,26 +97,26 @@ a:hover {
     justify-content: right;
 }
 
-#dropdown {
+#dropdown, #admin-dropdown {
     position: absolute;
     width: 8%;
     border-radius: 0.5rem;
     background-color: rgb(88,101,242);
 }
 
-#dropdown > * {
+#dropdown > *, #admin-dropdown > * {
     width: 100%;
     background-color: rgb(88,101,242);
     text-align: center;
 }
 
-#dropdown-menu {
+#dropdown-menu, #admin-dropdown-menu {
     display: none;
     padding-top: 0.5rem;
     border-radius: 0.5rem;
 }
 
-#dropdown:hover #dropdown-menu {
+#dropdown:hover #dropdown-menu, #admin-dropdown:hover #admin-dropdown-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

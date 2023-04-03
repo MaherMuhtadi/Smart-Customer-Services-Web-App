@@ -8,7 +8,8 @@ CREATE TABLE user (
     tel_no VARCHAR(12),
     email VARCHAR(100) UNIQUE,
     address VARCHAR(200),
-    balance DOUBLE DEFAULT 0.00
+    balance DOUBLE DEFAULT 0.00,
+    admin TINYINT(1) DEFAULT 0
 );
 
 -- Stores all delivery vehicles

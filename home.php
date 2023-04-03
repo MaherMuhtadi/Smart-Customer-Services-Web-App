@@ -9,6 +9,7 @@ include "layout.php";
 
 <style>
     .tiles {
+        width: fit-content;
         position: absolute;
         right: 5%;
     }
@@ -32,6 +33,12 @@ include "layout.php";
                 }
                 else {
                     $user = $_SESSION["user"];
+                    if ($user["admin"]) {
+                        echo "<div style='text-align:end'>Administrator</div>";
+                    }
+                    else {
+                        echo "<div style='text-align:end'>User</div>";
+                    }
                     echo "<h1>Welcome ".$user["login_id"]."#".$user["user_id"]."!</h1>";
                     echo "<p>Your current balance is ".$user["balance"]."</p>";
                 }

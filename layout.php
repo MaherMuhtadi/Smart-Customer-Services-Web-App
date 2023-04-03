@@ -21,12 +21,16 @@ function menuBar() {
     /**
      * Echoes the header element of the webpage
      */
+    $display = "style='display:none'";
     $class = "menu-item";
     $text = "Sign In";
     
     if (isset($_SESSION["user"])) {
         $class = "menu-item negative-button";
         $text = "Sign Out";
+        if ($_SESSION["user"]["admin"]) {
+            $display = "";
+        }
     }
 
     echo
@@ -46,6 +50,18 @@ function menuBar() {
                             <button style='border-radius:0' onclick=\"window.open('browse.php', '_self')\">Browse</button>
                             <button style='border-radius:0' onclick=\"window.open('cart.php', '_self')\">Cart</button>
                             <button style='border-top-right-radius:0;border-top-left-radius:0' onclick=\"window.open('delivery.php', '_self')\">Delivery</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div ${display} class='menu-item'>
+                    <div id='admin-dropdown'>
+                        <button style='text-decoration:underline'>Maintain</button>
+                        <div id='admin-dropdown-menu'>
+                            <button style='border-radius:0' onclick=\"window.open('', '_self')\">Insert</button>
+                            <button style='border-radius:0' onclick=\"window.open('', '_self')\">Delete</button>
+                            <button style='border-radius:0' onclick=\"window.open('', '_self')\">Select</button>
+                            <button style='border-top-right-radius:0;border-top-left-radius:0' onclick=\"window.open('', '_self')\">Update</button>
                         </div>
                     </div>
                 </div>
