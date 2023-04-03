@@ -1,12 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 
 include "layout.php";
-$user = $_SESSION["user"];
 ?>
 
 <html lang='en'>
@@ -15,7 +10,7 @@ $user = $_SESSION["user"];
 <style>
     .tiles {
         position: absolute;
-        right: 10%;
+        right: 5%;
     }
     .info {
         width: 100%;
@@ -31,8 +26,16 @@ $user = $_SESSION["user"];
     
     <main>
         <div class='tiles'>
-            <h1>Welcome <?php echo $user["login_id"]."#".$user["user_id"]; ?>!</h1>
-            <p>Your current balance is <?php echo $user["balance"]; ?></p>
+            <?php
+                if (!isset($_SESSION["user"])) {
+                    echo "<h1>Welcome Stranger!</h1>";
+                }
+                else {
+                    $user = $_SESSION["user"];
+                    echo "<h1>Welcome ".$user["login_id"]."#".$user["user_id"]."!</h1>";
+                    echo "<p>Your current balance is ".$user["balance"]."</p>";
+                }
+            ?>
         </div>
 
         <div class='info'>

@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 if (!isset($_SESSION["shopping_cart"])){
     $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
 }
@@ -80,7 +76,7 @@ include "admin/connect.php"
             <div id="map-form">
                 <div id="map-input">
                     <label for="destination">Deliver to:</label>
-                    <input id="destination" type="text" value="<?php echo $user["address"]; ?>" maxlength="200">
+                    <input id="destination" type="text" value="<?php if ($user) {echo $user["address"];} ?>" maxlength="200">
                 </div>
                 
                 <div id="map-input">

@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 
 include "layout.php";
 include "admin/connect.php";
@@ -44,6 +40,11 @@ if (isset($_POST["submitted"])) {
         padding: 1rem;
         border-width: 1px 0px 1px 0px;
     }
+    <?php
+        if (!isset($_SESSION["user"])) {
+            echo "#submit{background-color:rgb(72, 82, 197); pointer-events:none}";
+        }
+    ?>
 </style>
     
 <body>
@@ -52,7 +53,15 @@ if (isset($_POST["submitted"])) {
 
     <main>    
         <h1>Reviews</h1>
-        <h2>Help us improve by leaving your feedback</h2>
+
+        <h2><?php
+            if (!isset($_SESSION["user"])) {
+                echo "Please sign in to leave a feedback";
+            }
+            else {
+                echo "Help us improve by leaving your feedback";
+            }
+        ?></h2>
 
         <form method="post">
             <label for="feedback">Your Feedback:</label>
@@ -78,7 +87,7 @@ if (isset($_POST["submitted"])) {
             </div>
 
             <div>
-                <button name="submitted" type="submit">Post</button>
+                <button id="submit" name="submitted" type="submit">Post</button>
                 <button class="negative-button" type="reset">Clear</button>
             </div>
         </form>

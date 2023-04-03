@@ -21,6 +21,14 @@ function menuBar() {
     /**
      * Echoes the header element of the webpage
      */
+    $class = "menu-item";
+    $text = "Sign In";
+    
+    if (isset($_SESSION["user"])) {
+        $class = "menu-item negative-button";
+        $text = "Sign Out";
+    }
+
     echo
         "<header>
             <img style='width: 15%' src='images/logo.png' alt='logo'>
@@ -42,7 +50,7 @@ function menuBar() {
                     </div>
                 </div>
                 
-                <button class='menu-item negative-button' onclick=\"window.open('login.php', '_self')\">Sign Out</button>
+                <button class='${class}' onclick=\"window.open('login.php', '_self')\">${text}</button>
             </div>
         </header>";
 }
