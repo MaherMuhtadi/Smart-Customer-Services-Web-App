@@ -7,6 +7,29 @@ if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
 
 include "connect.php";
 
+// Processes user submission
+if (isset($_POST["user_submitted"])) {
+    unset($_POST["user_submitted"]);
+
+    $insert_user = 
+        "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address, admin)
+            VALUES ('"
+            .$_POST["login_id"]."', '"
+            .$_POST["password"]."', '"
+            .$_POST["first_name"]."', '"
+            .$_POST["last_name"]."', '"
+            .$_POST["tel_no"]."', '"
+            .$_POST["email"]."', '"
+            .$_POST["address"]."', "
+            .$_POST["admin"].")";
+    if (mysqli_query($connection, $insert_user)) {
+        echo $_POST["first_name"]." ".$_POST["last_name"]." added successfully as ".($_POST["admin"]?"an admin":"a user").".<br>";
+    }
+    else {
+        echo "Failed to add ".$_POST["first_name"]." ".$_POST["last_name"].".<br>";
+    }
+}
+
 // Processes item submission
 if (isset($_POST["item_submitted"])) {
     unset($_POST["item_submitted"]);
@@ -67,6 +90,40 @@ if (isset($_POST["warehouse_submitted"])) {
 ?>
 
 <h1>Insert new data to SCS Database</h1>
+
+<form method="post">
+    <h2>Add a user:</h2>
+
+    <label for="login_id">Username:</label>
+    <input type="text" id="login_id" name="login_id" maxlength="50"><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" maxlength="50"><br>
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" maxlength="50"><br>
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="last_name" maxlength="50"><br>
+
+    <label for="tel_no">Phone:</label>
+    <input type="tel" id="tel_no" name="tel_no" maxlength="12"><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" maxlength="100"><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" maxlength="200"><br>
+    
+    <label for="admin">Privilege:</label>
+    <select id="admin" name="admin">
+        <option value="0">User</option>
+        <option value="1">Admin</option>
+    </select><br>
+
+    <button name="user_submitted" type="submit">Add User</button>
+    <button type="reset">Clear</button>
+</form>
 
 <form enctype='multipart/form-data' method='post'>
     <h2>Add an item:</h2>
