@@ -16,7 +16,7 @@ include "admin/connect.php";
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Payment"); ?>
 
 <style>
     #container {

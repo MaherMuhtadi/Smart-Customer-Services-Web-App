@@ -22,7 +22,7 @@ if (isset($_POST["submitted"])) {
 ?>
     
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Reviews"); ?>
 
 <style>
     form {

@@ -9,7 +9,7 @@ include "layout.php";
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Browse Items"); ?>
 
 <style>
     .tiles {

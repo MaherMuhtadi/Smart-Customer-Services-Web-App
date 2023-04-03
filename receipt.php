@@ -49,7 +49,7 @@ include "layout.php";
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Receipt#".$receipt_id); ?>
 
 <style>
     main {

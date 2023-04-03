@@ -5,7 +5,7 @@ include "layout.php";
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead(""); ?>
 
 <style>
     .tiles {

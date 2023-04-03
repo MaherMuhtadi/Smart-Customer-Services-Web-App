@@ -81,7 +81,7 @@ elseif (isset($_POST["signin"])) {
 ?>
 
 <html lang="en">
-<?php htmlHead(); ?>
+<?php htmlHead("Sign In"); ?>
 
 <style>
     form {

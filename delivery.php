@@ -13,7 +13,7 @@ include "admin/connect.php"
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Delivery"); ?>
 
 <style>
     #map-container {
