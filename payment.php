@@ -103,7 +103,7 @@ include "admin/connect.php";
                     exit();
                 }
                 else {
-                    echo "<h1>Due to high volume of orders, we cannot process your request at the moment. Please try again later.</h1>";
+                    echo "<h2 style='color:rgb(218,55,60)'>Due to high volume of orders, we cannot process your request at the moment. Please try again later.</h2>";
                 }
             }
         ?>
@@ -147,7 +147,7 @@ include "admin/connect.php";
 
                 <div>
                     <label for="credit_card">Credit card:</label>
-                    <input id="credit_card" name="credit_card" type="text" maxlength="16">
+                    <input id="credit_card" name="credit_card" type="text" minlength="16" maxlength="19">
                 </div>
 
                 <div>
