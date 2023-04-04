@@ -91,7 +91,7 @@ if (isset($_POST["warehouse_submitted"])) {
 
 <h1>Insert new data to SCS Database</h1>
 
-<form method="post">
+<form onsubmit="return confirm('Are you sure you want to add this user?')" method="post">
     <h2>Add a user:</h2>
 
     <label for="login_id">Username:</label>
@@ -125,7 +125,7 @@ if (isset($_POST["warehouse_submitted"])) {
     <button type="reset">Clear</button>
 </form>
 
-<form enctype='multipart/form-data' method='post'>
+<form onsubmit="return confirm('Are you sure you want to add this item?')" enctype='multipart/form-data' method='post'>
     <h2>Add an item:</h2>
 
     <label for="img">Image:</label>
@@ -150,7 +150,7 @@ if (isset($_POST["warehouse_submitted"])) {
     <button type="reset">Clear</button>
 </form>
 
-<form method="post">
+<form onsubmit="return confirm('Are you sure you want to add this truck?')" method="post">
     <h2>Add a delivery truck:</h2>
     
     <label for="truck_code">Truck Code:</label>
@@ -160,7 +160,7 @@ if (isset($_POST["warehouse_submitted"])) {
     <button type="reset">Clear</button>
 </form>
 
-<form method="post">
+<form onsubmit="return confirm('Are you sure you want to add this warehouse?')" method="post">
     <h2>Add a warehouse:</h2>
     
     <label for="address">Warehouse address:</label>
