@@ -66,5 +66,6 @@ CREATE TABLE review (
 
 -- Stores all SCS warehouses
 CREATE TABLE warehouse (
-    address VARCHAR(200) PRIMARY KEY
+    warehouse_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    address VARCHAR(200) UNIQUE
 )
