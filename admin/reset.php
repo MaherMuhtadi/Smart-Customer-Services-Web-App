@@ -6,7 +6,8 @@ if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
 }
 
 include "connect.php";
-echo "Connected to database successfully.<br>";
+
+echo "<h1>Resetting the SCS Database</h1>";
 
 // Dropping existing instances of the tables
 try {
