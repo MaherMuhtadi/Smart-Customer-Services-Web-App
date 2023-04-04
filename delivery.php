@@ -1,12 +1,11 @@
 <?php
 session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit();
+}
 if (!isset($_SESSION["shopping_cart"])){
     $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
-}
-
-$display="";
-if (!isset($_SESSION["user"])) {
-    $display="disabled";
 }
 
 $KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI";
@@ -81,7 +80,7 @@ include "admin/connect.php"
             <div id="map-form">
                 <div id="map-input">
                     <label for="destination">Deliver to:</label>
-                    <input id="destination" type="text" value="<?php if ($user) {echo $user["address"];} ?>" maxlength="200">
+                    <input id="destination" type="text" value="<?php echo $user["address"]; ?>" maxlength="200">
                 </div>
                 
                 <div id="map-input">
@@ -111,7 +110,13 @@ include "admin/connect.php"
                 </div>
                 
                 <div id="info" class="info"></div>
-                <button <?php echo $display; ?> onclick="payRedirect()">Proceed to Pay</button>
+                <?php
+                    if ($user["free_delivery"]) {
+                        echo "<div class='info' style='text-align:end;color:rgb(185,69,193)'>Free Delivery Applied</div>";
+                    }
+                ?>
+
+                <button onclick="payRedirect()">Proceed to Pay</button>
             </div>
             
             <div id="map"></div>
@@ -128,7 +133,13 @@ include "admin/connect.php"
         let src = document.getElementById("source").value;
         let dst = document.getElementById("destination").value;
         let date = document.getElementById("date").value;
-        let url = `payment.php?src=${src}&dst=${dst}&distance=${distance}&date=${date}&fee=${fee}`;
+        <?php
+            $fee = "\${fee}";
+            if ($user["free_delivery"]) {
+                $fee = 0;
+            }
+        ?>
+        let url = `payment.php?src=${src}&dst=${dst}&distance=${distance}&date=${date}&fee=<?php echo $fee; ?>`;
         window.open(url, "_self");
     }
 </script>

@@ -1,7 +1,17 @@
 <?php
 session_start();
 
+include "admin/connect.php";
 include "layout.php";
+
+if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
+    unset($_POST["claim"]);
+    
+    $_SESSION["user"]["points"] -= 100;
+    $_SESSION["user"]["free_delivery"] = 1;
+
+    mysqli_query($connection, "UPDATE user SET points = ".$_SESSION["user"]["points"].", free_delivery = ".$_SESSION["user"]["free_delivery"]." WHERE user_id = ".$_SESSION["user"]["user_id"]);
+}
 ?>
 
 <html lang='en'>
@@ -26,6 +36,17 @@ include "layout.php";
     <?php menuBar(); ?>
     
     <main>
+        <?php
+            if (isset($_SESSION["user"])) {
+                $user = $_SESSION["user"];
+                if (!$user["free_delivery"] and $user["points"] >= 100) {
+                    echo 
+                        "<form style='text-align:center' method='post'>
+                            <button type='submit' name='claim' class='special-button'>Claim Your Free Delivery on Next Purchase</button>
+                        </form>";
+                }
+            }
+        ?>
         <div class='tiles'>
             <?php
                 if (!isset($_SESSION["user"])) {
@@ -40,7 +61,8 @@ include "layout.php";
                         echo "<div style='text-align:end'>User</div>";
                     }
                     echo "<h1>Welcome ".$user["login_id"]."#".$user["user_id"]."!</h1>";
-                    echo "<p>Your current balance is ".$user["balance"]."</p>";
+                    echo "<p>Your current balance is ".$user["balance"]." CAD</p>";
+                    echo "<p>You earned ".$user["points"]." Reward Points</p>";
                 }
             ?>
         </div>
@@ -58,6 +80,12 @@ include "layout.php";
                 selected warehouses to your doorsteps.</p>
             </div>
         </div>
+
+        <h2>Reward Points</h2>
+        <p>SCS also has a rewards system in place for you! You can earn 1 Reward Point for every 
+        dollar you spend with us! What can you do with your Reward Points? For just 100 Reward Points, 
+        you can place your next order for no additional delivery charges! Make sure to claim you free
+        delivery before your next purchase.</p>
     </main>
 
     <?php footer(); ?>

@@ -93,6 +93,11 @@ include "admin/connect.php";
                                 .$trip_id."')";
                     mysqli_query($connection, $insert_receipt);
 
+                    $_SESSION["user"]["points"] += intval($cart["total_cost"]);
+                    $_SESSION["user"]["free_delivery"] = 0;
+                    $user = $_SESSION["user"];
+                    mysqli_query($connection, "UPDATE user SET points = ".$user["points"].", free_delivery = ".$user["free_delivery"]." WHERE user_id = '".$user["user_id"]."'");
+
                     $receipt_id = "";
                     $result = mysqli_query($connection, "SELECT receipt_id, trip_id FROM receipt WHERE trip_id = '".$trip_id."'");
                     if (mysqli_num_rows($result) > 0) {

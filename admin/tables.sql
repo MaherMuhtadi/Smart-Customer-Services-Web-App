@@ -9,6 +9,8 @@ CREATE TABLE user (
     email VARCHAR(100) UNIQUE,
     address VARCHAR(200),
     balance DOUBLE DEFAULT 0.00,
+    points SMALLINT DEFAULT 0,
+    free_delivery TINYINT(1) DEFAULT 0,
     admin TINYINT(1) DEFAULT 0
 );
 

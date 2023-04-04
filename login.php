@@ -18,6 +18,8 @@ if (isset($_POST["signup"])) {
              "email"=>$_POST["email"],
              "address"=>$_POST["address"],
              "balance"=>0.00,
+             "points"=>0,
+             "free_delivery"=>0,
              "admin"=>0];
 
     $insert_user = 
@@ -50,7 +52,7 @@ if (isset($_POST["signup"])) {
 elseif (isset($_POST["signin"])) {
     unset($_POST["signin"]);
     
-    $search_user = "SELECT user_id, login_id, password, first_name, last_name, tel_no, email, address, balance, admin
+    $search_user = "SELECT user_id, login_id, password, first_name, last_name, tel_no, email, address, balance, points, free_delivery, admin
         FROM user WHERE login_id = '"
         .$_POST["login_id"]."'"
         ." AND password = "
@@ -68,6 +70,8 @@ elseif (isset($_POST["signin"])) {
                  "email"=>$row["email"],
                  "address"=>$row["address"],
                  "balance"=>$row["balance"],
+                 "points"=>$row["points"],
+                 "free_delivery"=>$row["free_delivery"],
                  "admin"=>$row["admin"]];
         $_SESSION["user"] = $user;
         if ($_POST["previous_page"] != "") {

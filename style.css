@@ -158,11 +158,11 @@ a:hover {
     background-color: rgb(180, 45, 50);
 }
 
-.admin-button {
+.special-button {
     background-color: rgb(185,69,193);
 }
 
-.admin-button:hover {
+.special-button:hover {
     background-color: rgb(151, 58, 158);
 }
 
