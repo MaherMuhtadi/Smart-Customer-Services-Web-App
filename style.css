@@ -110,6 +110,10 @@ a:hover {
     text-align: center;
 }
 
+#admin-dropdown, #admin-dropdown > * {
+    background-color: rgb(185,69,193);
+}
+
 #dropdown-menu, #admin-dropdown-menu {
     display: none;
     padding-top: 0.5rem;
@@ -152,6 +156,14 @@ a:hover {
 
 .negative-button:hover {
     background-color: rgb(180, 45, 50);
+}
+
+.admin-button {
+    background-color: rgb(185,69,193);
+}
+
+.admin-button:hover {
+    background-color: rgb(151, 58, 158);
 }
 
 .info {

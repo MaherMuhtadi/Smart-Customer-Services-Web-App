@@ -48,6 +48,23 @@ function table($name) {
 }
 ?>
 
+<style>
+    table {
+        border: 2px solid;
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    th, td {
+        text-align: center;
+        border: 2px solid;
+    }
+
+    td > * {
+        margin:auto;
+    }
+</style>
+
 <h1>Edit data from SCS Database</h1>
 
 <h2>Edit user accounts</h2>

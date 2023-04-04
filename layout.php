@@ -63,8 +63,8 @@ function menuBar() {
                     <div id='admin-dropdown'>
                         <button style='text-decoration:underline'>Maintain</button>
                         <div id='admin-dropdown-menu'>
-                            <button style='border-radius:0' onclick=\"window.open('admin/insert.php')\">Insert</button>
-                            <button style='border-radius:0' onclick=\"window.open('admin/edit.php')\">Edit</button>
+                            <button style='border-radius:0' class='admin-button' onclick=\"window.open('admin/insert.php')\">Insert</button>
+                            <button style='border-radius:0' class='admin-button' onclick=\"window.open('admin/edit.php')\">Edit</button>
                             <button style='border-top-right-radius:0;border-top-left-radius:0' class='negative-button' onclick=\"if (confirm('WARNING: You are about to reset the SCS database!')) {window.open('admin/reset.php')}\">Reset</button>
                         </div>
                     </div>
