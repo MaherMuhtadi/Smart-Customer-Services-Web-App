@@ -33,7 +33,7 @@ CREATE TABLE trip (
 CREATE TABLE receipt (
     receipt_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date_issued DATETIME,
-    date_delivered DATETIME DEFAULT NULL,
+    date_delivered DATETIME,
     items VARCHAR(300),
     total_price DOUBLE,
     payment VARCHAR(19),

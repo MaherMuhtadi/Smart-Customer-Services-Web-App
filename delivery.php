@@ -95,19 +95,15 @@ include "admin/connect.php"
 
                 <button id="generate-button" onclick="initMap()">Generate Map</button>
 
-                <?php
-                    $date = date("Y-m-d");
-                    echo
-                        "<div style='line-height:2rem'><div id='map-input'>"
-                        ."<label for='option_1'>Standard delivery:</label>"
-                        ."<div><input id='option_1' name='delivery' type='radio' checked>"
-                        .date('Y-m-d', strtotime($date.' + 3 days'))."</div></div>";
-                    echo 
-                        "<div id='map-input'>"
-                        ."<label for='option_2'>Express delivery:</label>"
-                        ."<div><input id='option_2' name='delivery' type='radio'>"
-                        .date('Y-m-d', strtotime($date.' + 1 days'))."</div></div></div>";
-                ?>
+                <div id="map-input">
+                    <label for="date">Delivery date:</label>
+                    <div style="width:70%">
+                        <?php
+                            $min_date = date('Y-m-d', strtotime(date('Y-m-d').' + 3 days'));
+                            echo "<input id='date' type='date' value='$min_date' min='$min_date'>";
+                        ?>
+                    </div>
+                </div>
                 
                 <div id="info" class="info"></div>
                 <button onclick="payRedirect()">Proceed to Pay</button>
@@ -126,7 +122,8 @@ include "admin/connect.php"
     function payRedirect() {
         let src = document.getElementById("source").value;
         let dst = document.getElementById("destination").value;
-        let url = `payment.php?src=${src}&dst=${dst}&distance=${distance}&fee=${fee}`;
+        let date = document.getElementById("date").value;
+        let url = `payment.php?src=${src}&dst=${dst}&distance=${distance}&date=${date}&fee=${fee}`;
         window.open(url, "_self");
     }
 </script>

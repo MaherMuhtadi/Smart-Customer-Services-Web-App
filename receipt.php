@@ -84,7 +84,7 @@ include "layout.php";
 
         <strong>Warehouse:</strong> <span class="entry"><?php echo $source; ?></span><br>
         <strong>Delivery Address:</strong> <span class="entry"><?php echo $destination; ?></span><br>
-        <strong>Date Delivered:</strong> <span class="entry"><?php echo $date_delivered; ?></span><br>
+        <strong>Delivery Date:</strong> <span class="entry"><?php echo $date_delivered; ?></span><br>
 
         <input type="hidden" id="source" value="<?php echo $source; ?>">
         <input type="hidden" id="destination" value="<?php echo $destination; ?>">
