@@ -19,7 +19,7 @@ function table($name) {
                 foreach ($row as $key=>$value) {
                     echo "<th>$key</th>";
                 }
-                echo "<th>Operations</th>";
+                echo "<th>Action</th>";
                 echo "</tr>";
                 $header = false;
             }
