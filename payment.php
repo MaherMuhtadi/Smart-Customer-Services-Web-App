@@ -9,6 +9,7 @@ elseif (count($_GET) == 0 or !isset($_SESSION["shopping_cart"])) {
     exit();
 }
 
+$KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI";
 $cart = $_SESSION["shopping_cart"];
 
 include "layout.php";
@@ -23,6 +24,11 @@ include "admin/connect.php";
         display: flex;
         justify-content: space-evenly;
     }
+    #map {
+	    width: 20vw;
+        height: 20vw;
+		margin: auto;
+	}
     form {
         width: 40%;
         display: flex;
@@ -126,6 +132,9 @@ include "admin/connect.php";
                 echo "<strong>Subotal:</strong> ".$cart["total_cost"]."CAD<hr>";
                 echo "<strong>From:</strong><br>".$_GET["src"]."<br>";
                 echo "<strong>To:</strong><br>".$_GET["dst"]."<br><br>";
+                echo "<input type='hidden' id='source' value='".$_GET["src"]."'>";
+                echo "<input type='hidden' id='destination' value='".$_GET["dst"]."'>";
+                echo "<div id='map'></div><br>";
                 echo "<strong>Shipping Fee:</strong> ".$_GET["fee"]."CAD";
                 echo "<h2>Total: ".$cart["total_cost"]+$_GET["fee"]." CAD</h2>";
             ?>
@@ -174,4 +183,8 @@ include "admin/connect.php";
     <?php footer(); ?>
 
 </body>
+
+<script src='maps.js'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo $KEY; ?>&callback=initMap"></script>
+
 </html>
