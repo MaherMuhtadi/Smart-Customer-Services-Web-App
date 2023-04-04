@@ -4,6 +4,11 @@ if (!isset($_SESSION["shopping_cart"])){
     $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
 }
 
+$display="";
+if (!isset($_SESSION["user"])) {
+    $display="disabled";
+}
+
 $KEY = "AIzaSyDJYCHEodV-BRyIe9tEt6VCIjq2E7L98qI";
 $user = $_SESSION["user"];
 $cart = $_SESSION["shopping_cart"];
@@ -106,7 +111,7 @@ include "admin/connect.php"
                 </div>
                 
                 <div id="info" class="info"></div>
-                <button onclick="payRedirect()">Proceed to Pay</button>
+                <button <?php echo $display; ?> onclick="payRedirect()">Proceed to Pay</button>
             </div>
             
             <div id="map"></div>
