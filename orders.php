@@ -70,7 +70,7 @@ include "admin/connect.php";
                 }
             }
             else {
-                $result = mysqli_query($connection, "SELECT * FROM receipt");
+                $result = mysqli_query($connection, "SELECT * FROM receipt WHERE user_id = ".$user["user_id"]);
                 if (mysqli_num_rows($result) > 0) {
                     echo 
                         "<table><tr>
