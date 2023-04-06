@@ -12,7 +12,7 @@ include "layout.php";
     <?php menuBar(); ?>
 
     <main class='info'>
-        <h1>Need help?</h1>
+        <h1>Need Help?</h1>
         Our team is here to assist you! Contact us at:
         <ul>
             <li>

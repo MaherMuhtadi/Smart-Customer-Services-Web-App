@@ -106,7 +106,7 @@ include "admin/connect.php";
 
                     unset($_SESSION["shopping_cart"]);
                     
-                    echo "<h1>Thank you for shopping!</h1>";
+                    echo "<h1>Thank You for Shopping!</h1>";
                     echo "<h2>Confirmation#".$receipt_id."</h2>";
                     echo "<button onclick='window.open(\"receipt.php?id=$receipt_id\")'>View Receipt</button>";
                     echo "</main>";

@@ -65,7 +65,7 @@ function table($name) {
     }
 </style>
 
-<h1>Edit data from SCS Database</h1>
+<h1>Edit Data from SCS Database</h1>
 
 <h2>Edit user accounts</h2>
 <?php table("user"); ?>

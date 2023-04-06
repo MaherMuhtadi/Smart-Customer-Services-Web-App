@@ -89,7 +89,7 @@ if (isset($_POST["warehouse_submitted"])) {
 }
 ?>
 
-<h1>Insert new data to SCS Database</h1>
+<h1>Insert New Data to SCS Database</h1>
 
 <form onsubmit="return confirm('Are you sure you want to add this user?')" method="post">
     <h2>Add a user:</h2>
