@@ -42,7 +42,10 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
                 if (!$user["free_delivery"] and $user["points"] >= 100) {
                     echo 
                         "<form style='text-align:center' method='post'>
-                            <button type='submit' name='claim' class='special-button'>Claim Free Delivery for Your Next Order</button>
+                            <button type='submit' name='claim' class='special-button'>
+                                <strong>Claim Free Delivery for Your Next Order.</strong><br>
+                                You have 3 days to claim it.
+                            </button>
                         </form>";
                 }
             }
