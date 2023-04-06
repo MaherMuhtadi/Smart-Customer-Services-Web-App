@@ -46,6 +46,7 @@ function menuBar() {
                 <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
                 <button class='menu-item' onclick=\"window.open('about.php', '_self')\">About us</button>
                 <button class='menu-item' onclick=\"window.open('contact.php', '_self')\">Contact us</button>
+                <button class='menu-item' onclick=\"window.open('orders.php', '_self')\">My Orders</button>
                 <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
                 
                 <div class='menu-item'>

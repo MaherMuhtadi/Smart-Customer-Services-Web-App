@@ -84,7 +84,7 @@ include "admin/connect.php";
                     $insert_receipt =
                         "INSERT INTO receipt (date_issued, date_delivered, items, total_price, payment, user_id, trip_id)
                             VALUES ('"
-                                .date("Y-m-d")."', '"
+                                .date("Y-m-d h:i:s")."', '"
                                 .$_GET["date"]."', '"
                                 .$items."', '"
                                 .$cart["total_cost"]+$_GET["fee"]."', '"
