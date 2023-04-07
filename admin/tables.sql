@@ -39,7 +39,7 @@ CREATE TABLE receipt (
     date_delivered DATETIME,
     items VARCHAR(300),
     total_price DOUBLE,
-    payment VARCHAR(19),
+    payment VARCHAR(256),
     user_id MEDIUMINT REFERENCES user(user_id) ON DELETE CASCADE,
     trip_id MEDIUMINT REFERENCES trip(trip_id) ON DELETE CASCADE
 );

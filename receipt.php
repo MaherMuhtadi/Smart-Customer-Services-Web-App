@@ -26,8 +26,11 @@ if (mysqli_num_rows($result) > 0) {
     $total_price = $receipt["total_price"];
     $trip_id = $receipt["trip_id"];
     
-    $len = strlen($receipt["payment"]) - 4;
-    $payment = str_repeat("*",$len).substr($receipt["payment"],$len);
+    // decrypting the paymen information and hiding all but the last 4 digits
+    $key =  md5($_SESSION["user"]["password"]);
+    $credit_card = openssl_decrypt($receipt["payment"], "aes-256-cbc", $decryption_key=$key);
+    $len = strlen($credit_card) - 4;
+    $payment = str_repeat("*",$len).substr($credit_card,$len);
 
     $trip = [];
     $result = mysqli_query($connection, "SELECT * FROM trip WHERE trip_id = '".$trip_id."'");

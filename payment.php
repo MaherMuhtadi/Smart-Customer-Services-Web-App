@@ -80,6 +80,11 @@ include "admin/connect.php";
                     if (mysqli_num_rows($result) > 0) {
                         $trip_id = mysqli_fetch_assoc($result)["trip_id"];
                     }
+                    
+                    // Encrypting the credit card number with password digest before storing
+                    error_reporting(E_ALL ^ E_WARNING);
+                    $key =  md5($_SESSION["user"]["password"]);
+                    $encrypted_credit_card = openssl_encrypt($_POST["credit_card"], "aes-256-cbc", $encryption_key=$key);
 
                     $insert_receipt =
                         "INSERT INTO receipt (date_issued, date_delivered, items, total_price, payment, user_id, trip_id)
@@ -88,7 +93,7 @@ include "admin/connect.php";
                                 .$_GET["date"]."', '"
                                 .$items."', '"
                                 .$cart["total_cost"]+$_GET["fee"]."', '"
-                                .$_POST["credit_card"]."', '"
+                                .$encrypted_credit_card."', '"
                                 .$_SESSION["user"]["user_id"]."', '"
                                 .$trip_id."')";
                     mysqli_query($connection, $insert_receipt);
