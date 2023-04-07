@@ -1,5 +1,5 @@
 <?php
-function htmlHead($page) {
+function htmlHead($page, $dir=".") {
     /**
      * Echoes the HTML head element of the website
      */
@@ -12,13 +12,13 @@ function htmlHead($page) {
         "<head>
             <meta name='viewport' content='width=device-width, initial-scale=1.0' />
             <meta charset='UTF-8'>
-            <title>${title}</title>
+            <title>$title</title>
 
-            <link rel='icon' href='images/icon.png'>
+            <link rel='icon' href='$dir/images/icon.png'>
             <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Electrolize'>
-            <link rel='stylesheet' href='style.css'>
+            <link rel='stylesheet' href='$dir/style.css'>
             <script src='https://code.jquery.com/jquery-3.6.4.min.js' integrity='sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=' crossorigin='anonymous'></script>
-            <script src='shopCart.js'></script>
+            <script src='$dir/shopCart.js'></script>
         </head>";
 }
 
@@ -60,7 +60,7 @@ function menuBar() {
                     </div>
                 </div>
 
-                <div ${display} class='menu-item'>
+                <div $display class='menu-item'>
                     <div id='admin-dropdown'>
                         <button style='text-decoration:underline'>Maintain</button>
                         <div id='admin-dropdown-menu'>
@@ -72,7 +72,7 @@ function menuBar() {
                     </div>
                 </div>
                 
-                <button class='${class}' onclick=\"window.open('login.php', '_self')\">${text}</button>
+                <button class='$class' onclick=\"window.open('login.php', '_self')\">$text</button>
             </div>
         </header>";
 }
