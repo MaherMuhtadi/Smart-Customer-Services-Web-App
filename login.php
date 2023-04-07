@@ -71,7 +71,7 @@ elseif (isset($_POST["signin"])) {
                 $row = mysqli_fetch_assoc($result);
                 $user = ["user_id"=>$row["user_id"],
                         "login_id"=>$row["login_id"],
-                        "password"=>$row["password"],
+                        "password"=>$_POST["password"],
                         "first_name"=>$row["first_name"],
                         "last_name"=>$row["last_name"],
                         "tel_no"=>$row["tel_no"],
