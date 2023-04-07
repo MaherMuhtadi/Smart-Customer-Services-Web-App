@@ -104,4 +104,18 @@ function footer() {
             </div>
         </footer>";
 }
+
+function browserDetect() {
+    /**
+     * Returns the browser
+     */
+    $res = $_SERVER['HTTP_USER_AGENT'];
+    if (strpos($res, "Edg") == true)
+        return "Microsoft Edge";
+    else if (strpos($res, "Chrome") == true)
+        return "Google Chrome";
+    else if (strpos($res, "Firefox") == true)
+        return "Firefox";
+    else return "Unknown";
+}
 ?>

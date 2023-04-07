@@ -67,6 +67,8 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
                     echo "<p>Your current balance is ".$user["balance"]." CAD</p>";
                     echo "<p>You earned ".$user["points"]." Reward Points</p>";
                 }
+
+                echo "<p style='font-size:small'>Your Browser: ".browserDetect()."</p>";
             ?>
         </div>
 
