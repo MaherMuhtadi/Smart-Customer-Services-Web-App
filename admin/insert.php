@@ -11,11 +11,16 @@ include "connect.php";
 if (isset($_POST["user_submitted"])) {
     unset($_POST["user_submitted"]);
 
+    // creates a salted and secured password hash
+    $salt = bin2hex(random_bytes(5)); // 10 chars
+    $password_hash = md5($_POST["password"].$salt);
+
     $insert_user = 
-        "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address, admin)
+        "INSERT INTO user (login_id, password_hash, salt, first_name, last_name, tel_no, email, address, admin)
             VALUES ('"
             .$_POST["login_id"]."', '"
-            .$_POST["password"]."', '"
+            .$password_hash."', '"
+            .$salt."', '"
             .$_POST["first_name"]."', '"
             .$_POST["last_name"]."', '"
             .$_POST["tel_no"]."', '"
