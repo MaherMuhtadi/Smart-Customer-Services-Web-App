@@ -23,23 +23,6 @@ function Browse() {
   //component states
   const [items, setItems] = useState(null);
   const [loadedState, setLoadedState] = useState(false);
-  const [dragStartData, setDragStartData] = useState(null);
-
-  const renderRow = (entry) => {
-    
-    return (
-      <tr id={entry[0]} className='items' draggable='true'>
-        <td>{entry[0]}</td>
-        <td>{entry[1]}</td>
-        <td>{entry[2]}</td>
-        <td>{entry[3]}</td>
-        <td>{entry[4]}</td>
-        <td>{entry[5]}</td>
-        <td>{entry[6]}</td>
-      </tr>
-    );
-
-  }
 
   useEffect(()=>{
       if (!items){
@@ -51,7 +34,7 @@ function Browse() {
     //console.log(items)
     for (var i=0; i<items.length; i++){
       items[i].addEventListener("dragstart", (ev)=>{
-        console.log("Ayo we draggin")
+        console.log("Dragging...")
         ev.dataTransfer.setData("text/plain", ev.target.id);
       }); 
     }   
