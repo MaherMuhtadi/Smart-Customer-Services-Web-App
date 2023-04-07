@@ -6,7 +6,19 @@ if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
 }
 
 include "connect.php";
+include "../layout.php";
+?>
 
+<?php htmlHead("Admin - Update", ".."); ?>
+
+<style>
+    form {
+        line-height: 2.5rem;
+    }
+</style>
+
+<body><main>
+<?php
 // Processing update request
 if (isset($_POST["update"])) {
     unset($_POST["update"]);
@@ -24,7 +36,7 @@ if (isset($_POST["update"])) {
             echo "<h2>$k: $v</h2>";
         }
         else {
-            echo "<label for='$k'>$k:</label>";
+            echo "<label for='$k'>$k: </label>";
             echo "<input type='text' id='$k' name='$k' value='$v'><br>";
         }
     }
@@ -71,3 +83,4 @@ if (isset($_POST["submit_update"])) {
     exit();
 }
 ?>
+</main></body>

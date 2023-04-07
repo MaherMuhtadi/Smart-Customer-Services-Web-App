@@ -6,6 +6,7 @@ if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
 }
 
 include "connect.php";
+include "../layout.php";
 
 // Processes user submission
 if (isset($_POST["user_submitted"])) {
@@ -94,83 +95,97 @@ if (isset($_POST["warehouse_submitted"])) {
 }
 ?>
 
-<h1>Insert New Data to SCS Database</h1>
+<html lang='en'>
+<?php htmlHead("Admin - Insert", ".."); ?>
 
-<form onsubmit="return confirm('Are you sure you want to add this user?')" method="post">
-    <h2>Add a user:</h2>
+<style>
+    form {
+        line-height: 2.5rem;
+    }
+</style>
 
-    <label for="login_id">Username:</label>
-    <input type="text" id="login_id" name="login_id" maxlength="50"><br>
+<body>
+    <main>
+        <h1>Insert New Data to SCS Database</h1>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" maxlength="50"><br>
+        <form onsubmit="return confirm('Are you sure you want to add this user?')" method="post">
+            <h2>Add a user:</h2>
 
-    <label for="first_name">First Name:</label>
-    <input type="text" id="first_name" name="first_name" maxlength="50"><br>
+            <label for="login_id">Username:</label>
+            <input type="text" id="login_id" name="login_id" maxlength="50"><br>
 
-    <label for="last_name">Last Name</label>
-    <input type="text" id="last_name" name="last_name" maxlength="50"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" maxlength="50"><br>
 
-    <label for="tel_no">Phone:</label>
-    <input type="tel" id="tel_no" name="tel_no" maxlength="12"><br>
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" maxlength="50"><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" maxlength="100"><br>
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" maxlength="50"><br>
 
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" maxlength="200"><br>
-    
-    <label for="admin">Privilege:</label>
-    <select id="admin" name="admin">
-        <option value="0">User</option>
-        <option value="1">Admin</option>
-    </select><br>
+            <label for="tel_no">Phone:</label>
+            <input type="tel" id="tel_no" name="tel_no" maxlength="12"><br>
 
-    <button name="user_submitted" type="submit">Add User</button>
-    <button type="reset">Clear</button>
-</form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" maxlength="100"><br>
 
-<form onsubmit="return confirm('Are you sure you want to add this item?')" enctype='multipart/form-data' method='post'>
-    <h2>Add an item:</h2>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" maxlength="200"><br>
+            
+            <label for="admin">Privilege:</label>
+            <select id="admin" name="admin">
+                <option value="0">User</option>
+                <option value="1">Admin</option>
+            </select><br>
 
-    <label for="img">Image:</label>
-    <input id="img" name="img" type="file"><br>
-    
-    <label for="item_name">Name:</label>
-    <input id="item_name" name="item_name" type="text"  maxlength="100"><br>
-    
-    <label for="price">Price:</label>
-    <input id="price" name="price" type="number"><br>
-    
-    <label for="made_in">Made In:</label>
-    <input id="made_in" name="made_in" type="text"  maxlength="50"><br>
-    
-    <label for="department">Department:</label>
-    <input id="department" name="department" type="text"  maxlength="50"><br>
-    
-    <label for="store_name">Store:</label>
-    <input id="store_name" name="store_name" type="text"  maxlength="50"><br>
+            <button class='special-button' name="user_submitted" type="submit">Add User</button>
+            <button class='negative-button' type="reset">Clear</button>
+        </form>
 
-    <button name="item_submitted" type="submit">Add Item</button>
-    <button type="reset">Clear</button>
-</form>
+        <form onsubmit="return confirm('Are you sure you want to add this item?')" enctype='multipart/form-data' method='post'>
+            <h2>Add an item:</h2>
 
-<form onsubmit="return confirm('Are you sure you want to add this truck?')" method="post">
-    <h2>Add a delivery truck:</h2>
-    
-    <label for="truck_code">Truck Code:</label>
-    <input id="truck_code" name="truck_code" maxlength="50">
-    
-    <button name="truck_submitted" type="submit">Add Truck</button>
-    <button type="reset">Clear</button>
-</form>
+            <label for="img">Image:</label>
+            <input id="img" name="img" type="file"><br>
+            
+            <label for="item_name">Name:</label>
+            <input id="item_name" name="item_name" type="text"  maxlength="100"><br>
+            
+            <label for="price">Price:</label>
+            <input id="price" name="price" type="number"><br>
+            
+            <label for="made_in">Made In:</label>
+            <input id="made_in" name="made_in" type="text"  maxlength="50"><br>
+            
+            <label for="department">Department:</label>
+            <input id="department" name="department" type="text"  maxlength="50"><br>
+            
+            <label for="store_name">Store:</label>
+            <input id="store_name" name="store_name" type="text"  maxlength="50"><br>
 
-<form onsubmit="return confirm('Are you sure you want to add this warehouse?')" method="post">
-    <h2>Add a warehouse:</h2>
-    
-    <label for="address">Warehouse address:</label>
-    <input id="address" name="address" maxlength="200">
-    
-    <button name="warehouse_submitted" type="submit">Add warehouse</button>
-    <button type="reset">Clear</button>
-</form>
+            <button class='special-button' name="item_submitted" type="submit">Add Item</button>
+            <button class='negative-button' type="reset">Clear</button>
+        </form>
+
+        <form onsubmit="return confirm('Are you sure you want to add this truck?')" method="post">
+            <h2>Add a delivery truck:</h2>
+            
+            <label for="truck_code">Truck Code:</label>
+            <input id="truck_code" name="truck_code" maxlength="50">
+            
+            <button class='special-button' name="truck_submitted" type="submit">Add Truck</button>
+            <button class='negative-button' type="reset">Clear</button>
+        </form>
+
+        <form onsubmit="return confirm('Are you sure you want to add this warehouse?')" method="post">
+            <h2>Add a warehouse:</h2>
+            
+            <label for="address">Warehouse address:</label>
+            <input id="address" name="address" maxlength="200">
+            
+            <button class='special-button' name="warehouse_submitted" type="submit">Add warehouse</button>
+            <button class='negative-button' type="reset">Clear</button>
+        </form>
+    </main>
+</body>
+</html>
