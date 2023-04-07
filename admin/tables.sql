@@ -2,7 +2,8 @@
 CREATE TABLE user (
     user_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     login_id VARCHAR(50),
-    password VARCHAR(50),
+    password_hash VARCHAR(32),
+    salt VARCHAR(10),
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     tel_no VARCHAR(12),
