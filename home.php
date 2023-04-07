@@ -29,6 +29,9 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
         display: flex;
         align-items: center;
     }
+    .info > * {
+        width:50%;
+    }
 </style>
 
 <body>
@@ -73,7 +76,7 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
         </div>
 
         <div class='info'>
-            <img width="50%" src='images/home_art.png' alt='Online Shopping'>
+            <img src='images/home_art.png' alt='Online Shopping'>
             <div>
                 <h1>Why SCS?</h1>
                 <p>Smart Customer Services (SCS) is an online system that aims to plan for smart green
