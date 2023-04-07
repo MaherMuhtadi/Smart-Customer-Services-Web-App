@@ -6,11 +6,12 @@ export default class Cart extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            items: localStorage.getItem('shopping_cart')? JSON.parse(localStorage.getItem('shopping_cart'))['items']: {},
-            total_cost: localStorage.getItem('shopping_cart')? JSON.parse(localStorage.getItem('shopping_cart'))['total_cost']: 0
+            items_q: localStorage.getItem('shopping_cart')? JSON.parse(localStorage.getItem('shopping_cart'))['items_q']: {},
+            total_cost: localStorage.getItem('shopping_cart')? JSON.parse(localStorage.getItem('shopping_cart'))['total_cost']: 0,
+            items_i: localStorage.getItem('shopping_cart')? JSON.parse(localStorage.getItem('shopping_cart'))['items_i']: {}
+
         }
     }
-    
     dragoverHandler = (ev) => {
         ev.preventDefault();
     }
@@ -23,17 +24,30 @@ export default class Cart extends React.Component {
         console.log(elem)
         let cost = Number(elem.childNodes[3].innerHTML.split(" ")[0]);
         let name = elem.childNodes[2].innerHTML;
+        let id = elem.childNodes[0].innerHTML;
         console.log(this.state.total_cost)
-        console.log(JSON.stringify(this.state.items))
+        console.log(JSON.stringify(this.state.items_q))
+        let item_obj = {
+            "image_url":elem.childNodes[1].firstChild.src,
+            "name": name,
+            "price":cost,
+            "origin": elem.childNodes[4].innerHTML,
+            "dept":elem.childNodes[5].innerHTML,
+            "store":elem.childNodes[6].innerHTML
+        }
         
         
      
-        if (this.state.items[name]){
-            this.setState({items: {...this.state.items, [name]: this.state.items[name]+1}, total_cost: this.state.total_cost + cost})
+        if (this.state.items_q[name]){
+            this.setState({items_q: {...this.state.items_q, [name]: this.state.items_q[name]+1},
+                total_cost: this.state.total_cost + cost})
         }
         else{
             this.setState({ 
-                    items: {...this.state.items, [name]:1}, total_cost: this.state.total_cost + cost})
+                    items_q: {...this.state.items_q, [name]:1},
+                    total_cost: this.state.total_cost + cost,
+                    items_i: {...this.state.items_i, [id]: item_obj}
+                })
         }
 
     }
@@ -43,15 +57,15 @@ export default class Cart extends React.Component {
          * Clear shopping cart data 
          */
         localStorage.removeItem('shopping_cart')
-        this.setState({items: {}, total_cost:0})
+        this.setState({items_q: {}, total_cost:0, items_i:{}})
     }
 
     refreshCart = () => {
         var cart = document.getElementById("shopping-cart");
         cart.innerHTML = '';
-        for (const key in this.state.items) {
+        for (const key in this.state.items_q) {
             const node = document.createElement("ul");
-            var num = this.state['items'][key];
+            var num = this.state['items_q'][key];
             node.innerHTML = `<li>${key} x${num}</li>`;
             cart.appendChild(node);
         }
@@ -65,7 +79,7 @@ export default class Cart extends React.Component {
     componentDidUpdate(prevState){
         console.log("Current cost: "+this.state.total_cost)
         if (prevState.total_cost !=this.state.total_cost){
-            let sc_obj = {'items': this.state.items, 'total_cost': this.state.total_cost};
+            let sc_obj = {'items_q': this.state.items_q, 'total_cost': this.state.total_cost, 'items_i': this.state.items_i};
             localStorage.setItem('shopping_cart', JSON.stringify(sc_obj));
 
             this.refreshCart();
