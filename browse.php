@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 if (!isset($_SESSION["shopping_cart"])){
     $_SESSION["shopping_cart"] = ["items"=>[],"total_cost" => 0];
 }
@@ -13,7 +9,7 @@ include "layout.php";
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Browse Items"); ?>
 
 <style>
     .tiles {

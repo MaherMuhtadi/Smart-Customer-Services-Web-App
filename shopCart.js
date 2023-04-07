@@ -1,12 +1,21 @@
 function dragstartHandler(ev) {
+    /**
+     * Handles dragstart event
+     */
     ev.dataTransfer.setData("text/plain", ev.target.id);
 }
 
 function dragoverHandler(ev) {
+    /**
+     * Handles dragover event
+     */
     ev.preventDefault();
 }
 
 function dropHandler(ev) {
+    /**
+     * Handles drop event
+     */
     ev.preventDefault();
     const data = ev.dataTransfer.getData("text/plain");
     let elem = document.getElementById(data);

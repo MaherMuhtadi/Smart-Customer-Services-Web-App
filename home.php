@@ -1,20 +1,27 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 
+include "admin/connect.php";
 include "layout.php";
-$user = $_SESSION["user"];
+
+if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
+    unset($_POST["claim"]);
+    
+    $_SESSION["user"]["points"] -= 100;
+    $_SESSION["user"]["free_delivery"] = 1;
+
+    mysqli_query($connection, "UPDATE user SET points = ".$_SESSION["user"]["points"].", free_delivery = ".$_SESSION["user"]["free_delivery"]." WHERE user_id = ".$_SESSION["user"]["user_id"]);
+}
 ?>
 
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead(""); ?>
 
 <style>
     .tiles {
+        width: fit-content;
         position: absolute;
+        right: 5%;
     }
     .info {
         width: 100%;
@@ -29,9 +36,38 @@ $user = $_SESSION["user"];
     <?php menuBar(); ?>
     
     <main>
+        <?php
+            if (isset($_SESSION["user"])) {
+                $user = $_SESSION["user"];
+                if (!$user["free_delivery"] and $user["points"] >= 100) {
+                    echo 
+                        "<form style='text-align:center' method='post'>
+                            <button type='submit' name='claim' class='special-button'>
+                                <strong>Claim Free Delivery for Your Next Order.</strong><br>
+                                You have 3 days to claim it.
+                            </button>
+                        </form>";
+                }
+            }
+        ?>
         <div class='tiles'>
-            <h1>Welcome <?php echo $user["login_id"]."#".$user["user_id"]; ?>!</h1>
-            <p>Your current balance is <?php echo $user["balance"]; ?></p>
+            <?php
+                if (!isset($_SESSION["user"])) {
+                    echo "<h1>Welcome Stranger!</h1>";
+                }
+                else {
+                    $user = $_SESSION["user"];
+                    if ($user["admin"]) {
+                        echo "<div style='text-align:end'>Administrator</div>";
+                    }
+                    else {
+                        echo "<div style='text-align:end'>User</div>";
+                    }
+                    echo "<h1>Welcome ".$user["login_id"]."#".$user["user_id"]."!</h1>";
+                    echo "<p>Your current balance is ".$user["balance"]." CAD</p>";
+                    echo "<p>You earned ".$user["points"]." Reward Points</p>";
+                }
+            ?>
         </div>
 
         <div class='info'>
@@ -47,6 +83,12 @@ $user = $_SESSION["user"];
                 selected warehouses to your doorsteps.</p>
             </div>
         </div>
+
+        <h2>Reward Points</h2>
+        <p>SCS also has a rewards system in place for you! You can earn 1 Reward Point for every 
+        dollar you spend with us! What can you do with your Reward Points? For just 100 Reward Points, 
+        you can place your next order for no additional delivery charges! Make sure to claim you free
+        delivery before your next purchase.</p>
     </main>
 
     <?php footer(); ?>

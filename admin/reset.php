@@ -1,6 +1,13 @@
 <?php
+session_start();
+if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
+    echo "<h1>Access Denied!</h1>";
+    exit();
+}
+
 include "connect.php";
-echo "Connected to database successfully.<br>";
+
+echo "<h1>Resetting the SCS Database</h1>";
 
 // Dropping existing instances of the tables
 try {

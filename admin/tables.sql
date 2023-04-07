@@ -2,13 +2,17 @@
 CREATE TABLE user (
     user_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     login_id VARCHAR(50),
-    password VARCHAR(50),
+    password_hash VARCHAR(32),
+    salt VARCHAR(10),
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     tel_no VARCHAR(12),
     email VARCHAR(100) UNIQUE,
     address VARCHAR(200),
-    balance DOUBLE DEFAULT 0.00
+    balance DOUBLE DEFAULT 0.00,
+    points SMALLINT DEFAULT 0,
+    free_delivery TINYINT(1) DEFAULT 0,
+    admin TINYINT(1) DEFAULT 0
 );
 
 -- Stores all delivery vehicles
@@ -32,9 +36,10 @@ CREATE TABLE trip (
 CREATE TABLE receipt (
     receipt_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     date_issued DATETIME,
-    date_delivered DATETIME DEFAULT NULL,
+    date_delivered DATETIME,
+    items VARCHAR(300),
     total_price DOUBLE,
-    payment VARCHAR(16),
+    payment VARCHAR(19),
     user_id MEDIUMINT REFERENCES user(user_id) ON DELETE CASCADE,
     trip_id MEDIUMINT REFERENCES trip(trip_id) ON DELETE CASCADE
 );
@@ -64,5 +69,6 @@ CREATE TABLE review (
 
 -- Stores all SCS warehouses
 CREATE TABLE warehouse (
-    address VARCHAR(200) PRIMARY KEY
+    warehouse_id MEDIUMINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    address VARCHAR(200) UNIQUE
 )

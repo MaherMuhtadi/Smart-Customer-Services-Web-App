@@ -1,22 +1,18 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit();
-}
 
 include "layout.php";
 ?>
     
 <html lang='en'>
-<?php htmlHead(); ?>
+<?php htmlHead("Contact Us"); ?>
     
 <body>
     
     <?php menuBar(); ?>
 
     <main class='info'>
-        <h1>Need help?</h1>
+        <h1>Need Help?</h1>
         Our team is here to assist you! Contact us at:
         <ul>
             <li>

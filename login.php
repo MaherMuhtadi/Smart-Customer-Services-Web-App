@@ -17,13 +17,21 @@ if (isset($_POST["signup"])) {
              "tel_no"=>$_POST["tel_no"],
              "email"=>$_POST["email"],
              "address"=>$_POST["address"],
-             "balance"=>0.00];
+             "balance"=>0.00,
+             "points"=>0,
+             "free_delivery"=>0,
+             "admin"=>0];
+    
+    // creates a salted and secured password hash
+    $salt = bin2hex(random_bytes(5)); // 10 chars
+    $password_hash = md5($_POST["password_new"].$salt);
 
     $insert_user = 
-        "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address)
+        "INSERT INTO user (login_id, password_hash, salt, first_name, last_name, tel_no, email, address)
             VALUES ('"
             .$user["login_id"]."', '"
-            .$user["password"]."', '"
+            .$password_hash."', '"
+            .$salt."', '"
             .$user["first_name"]."', '"
             .$user["last_name"]."', '"
             .$user["tel_no"]."', '"
@@ -36,6 +44,10 @@ if (isset($_POST["signup"])) {
     if (mysqli_num_rows($result) > 0) {
         $user["user_id"] = mysqli_fetch_assoc($result)["user_id"];
         $_SESSION["user"] = $user;
+        if ($_POST["previous_page"] != "") {
+            header("Location: ".$_POST["previous_page"]);
+            exit();
+        }
         header("Location: home.php");
         exit();
     }
@@ -45,33 +57,45 @@ if (isset($_POST["signup"])) {
 elseif (isset($_POST["signin"])) {
     unset($_POST["signin"]);
     
-    $search_user = "SELECT user_id, login_id, password, first_name, last_name, tel_no, email, address, balance
-        FROM user WHERE login_id = '"
-        .$_POST["login_id"]."'"
-        ." AND password = "
-        ."'".$_POST["password"]."'";
-    $result = mysqli_query($connection, $search_user);
+    // retrieve salt
+    $salt_query = "SELECT salt, login_id FROM user WHERE login_id = '".$_POST["login_id"]."'";
+    $salt_result = mysqli_query($connection, $salt_query);
+    if (mysqli_num_rows($salt_result) > 0) {
+        while ($salt_row = mysqli_fetch_assoc($salt_result)) {
+            $password_hash = md5($_POST["password"].$salt_row["salt"]);
+
+            $search_user = "SELECT * FROM user WHERE login_id = '".$_POST["login_id"]."' AND password_hash = '$password_hash'";
+            $result = mysqli_query($connection, $search_user);
     
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $user = ["user_id"=>$row["user_id"],
-                 "login_id"=>$row["login_id"],
-                 "password"=>$row["password"],
-                 "first_name"=>$row["first_name"],
-                 "last_name"=>$row["last_name"],
-                 "tel_no"=>$row["tel_no"],
-                 "email"=>$row["email"],
-                 "address"=>$row["address"],
-                 "balance"=>$row["balance"]];
-        $_SESSION["user"] = $user;
-        header("Location: home.php");
-        exit();
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $user = ["user_id"=>$row["user_id"],
+                        "login_id"=>$row["login_id"],
+                        "password"=>$row["password"],
+                        "first_name"=>$row["first_name"],
+                        "last_name"=>$row["last_name"],
+                        "tel_no"=>$row["tel_no"],
+                        "email"=>$row["email"],
+                        "address"=>$row["address"],
+                        "balance"=>$row["balance"],
+                        "points"=>$row["points"],
+                        "free_delivery"=>$row["free_delivery"],
+                        "admin"=>$row["admin"]];
+                $_SESSION["user"] = $user;
+                if ($_POST["previous_page"] != "") {
+                    header("Location: ".$_POST["previous_page"]);
+                    exit();
+                }
+                header("Location: home.php");
+                exit();
+            }
+        }
     }
 }
 ?>
 
 <html lang="en">
-<?php htmlHead(); ?>
+<?php htmlHead("Sign In"); ?>
 
 <style>
     form {
@@ -97,6 +121,17 @@ elseif (isset($_POST["signin"])) {
     
     <header>
         <img style="width: 15%" src="images/logo.png" alt="logo">
+        <div>
+            <?php
+                if (isset($_POST["previous_page"]) and $_POST["previous_page"] != "") {
+                    echo "<button onclick=\"window.open('".$_POST["previous_page"]."', '_self')\">Back</button>";
+                }
+                elseif (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], "login.php") == false) {
+                    echo "<button onclick=\"window.open('".$_SERVER['HTTP_REFERER']."', '_self')\">Back</button>";
+                }
+            ?>
+            <button onclick="window.open('home.php', '_self')">Home</button>
+        </div>
     </header>
 
     <main>
@@ -141,6 +176,16 @@ elseif (isset($_POST["signin"])) {
                     <input id="address" name="address" type="text" maxlength="200">
                 </div>
 
+                <?php
+                    if (isset($_POST["previous_page"])) {
+                        echo "<input hidden name='previous_page' value='".$_POST["previous_page"]."'>";
+                    }
+                    else {
+                        $previous = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
+                        echo "<input hidden name='previous_page' value='".$previous."'>";
+                    }
+                ?>
+
                 <div>
                     <button name="signup" type="submit">Sign Up</button>
                     <button class="negative-button" type="reset">Clear</button>
@@ -159,6 +204,16 @@ elseif (isset($_POST["signin"])) {
                     <label for="password2">Password:</label>
                     <input id="password2" name="password" type="password" maxlength="50">
                 </div>
+
+                <?php
+                    if (isset($_POST["previous_page"])) {
+                        echo "<input hidden name='previous_page' value='".$_POST["previous_page"]."'>";
+                    }
+                    else {
+                        $previous = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
+                        echo "<input hidden name='previous_page' value='".$previous."'>";
+                    }
+                ?>
 
                 <div>
                     <button name="signin" type="submit">Sign In</button>

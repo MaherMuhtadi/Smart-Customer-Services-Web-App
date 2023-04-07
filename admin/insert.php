@@ -1,6 +1,39 @@
 <?php
+session_start();
+if (!isset($_SESSION["user"]) or !$_SESSION["user"]["admin"]) {
+    echo "<h1>Access Denied!</h1>";
+    exit();
+}
+
 include "connect.php";
-echo "Connected to database successfully.<br>";
+
+// Processes user submission
+if (isset($_POST["user_submitted"])) {
+    unset($_POST["user_submitted"]);
+
+    // creates a salted and secured password hash
+    $salt = bin2hex(random_bytes(5)); // 10 chars
+    $password_hash = md5($_POST["password"].$salt);
+
+    $insert_user = 
+        "INSERT INTO user (login_id, password_hash, salt, first_name, last_name, tel_no, email, address, admin)
+            VALUES ('"
+            .$_POST["login_id"]."', '"
+            .$password_hash."', '"
+            .$salt."', '"
+            .$_POST["first_name"]."', '"
+            .$_POST["last_name"]."', '"
+            .$_POST["tel_no"]."', '"
+            .$_POST["email"]."', '"
+            .$_POST["address"]."', "
+            .$_POST["admin"].")";
+    if (mysqli_query($connection, $insert_user)) {
+        echo $_POST["first_name"]." ".$_POST["last_name"]." added successfully as ".($_POST["admin"]?"an admin":"a user").".<br>";
+    }
+    else {
+        echo "Failed to add ".$_POST["first_name"]." ".$_POST["last_name"].".<br>";
+    }
+}
 
 // Processes item submission
 if (isset($_POST["item_submitted"])) {
@@ -60,8 +93,45 @@ if (isset($_POST["warehouse_submitted"])) {
     }
 }
 ?>
-<form enctype='multipart/form-data' method='post'>
-    <p>Add an item to SCS Database:<p>
+
+<h1>Insert New Data to SCS Database</h1>
+
+<form onsubmit="return confirm('Are you sure you want to add this user?')" method="post">
+    <h2>Add a user:</h2>
+
+    <label for="login_id">Username:</label>
+    <input type="text" id="login_id" name="login_id" maxlength="50"><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" maxlength="50"><br>
+
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" maxlength="50"><br>
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="last_name" maxlength="50"><br>
+
+    <label for="tel_no">Phone:</label>
+    <input type="tel" id="tel_no" name="tel_no" maxlength="12"><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" maxlength="100"><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" maxlength="200"><br>
+    
+    <label for="admin">Privilege:</label>
+    <select id="admin" name="admin">
+        <option value="0">User</option>
+        <option value="1">Admin</option>
+    </select><br>
+
+    <button name="user_submitted" type="submit">Add User</button>
+    <button type="reset">Clear</button>
+</form>
+
+<form onsubmit="return confirm('Are you sure you want to add this item?')" enctype='multipart/form-data' method='post'>
+    <h2>Add an item:</h2>
 
     <label for="img">Image:</label>
     <input id="img" name="img" type="file"><br>
@@ -85,8 +155,8 @@ if (isset($_POST["warehouse_submitted"])) {
     <button type="reset">Clear</button>
 </form>
 
-<form method="post">
-    <p>Add a delivery truck to SCS Database:<p>
+<form onsubmit="return confirm('Are you sure you want to add this truck?')" method="post">
+    <h2>Add a delivery truck:</h2>
     
     <label for="truck_code">Truck Code:</label>
     <input id="truck_code" name="truck_code" maxlength="50">
@@ -95,8 +165,8 @@ if (isset($_POST["warehouse_submitted"])) {
     <button type="reset">Clear</button>
 </form>
 
-<form method="post">
-    <p>Add a warehouse to SCS Database:<p>
+<form onsubmit="return confirm('Are you sure you want to add this warehouse?')" method="post">
+    <h2>Add a warehouse:</h2>
     
     <label for="address">Warehouse address:</label>
     <input id="address" name="address" maxlength="200">
