@@ -6,10 +6,16 @@ function ShoppingCart() {
   //const [itemInfos, setItemInfos] = useState(localStorage.getItem('items_i'));
 
   const itemInfos = JSON.parse(localStorage.getItem('shopping_cart'))['items_i'];
+  const itemQuantities = JSON.parse(localStorage.getItem('shopping_cart'))['items_q'];
+  const totalCost = JSON.parse(localStorage.getItem('shopping_cart'))['total_cost'];
+  const style1 = {
+    textAlign:'right'
+  }
   useEffect(() => {
      setCartContents(localStorage.getItem('items_q'));
   }, [cartContents])
 
+  
 
   return (
     <main>
@@ -42,10 +48,15 @@ function ShoppingCart() {
               <td>{itemInfos[key]['origin']}</td>
               <td>{itemInfos[key]['dept']}</td>
               <td>{itemInfos[key]['store']}</td>
+              <td>{itemQuantities[itemInfos[key]['name']]}</td>
+              <td>{Number(itemQuantities[itemInfos[key]['name']])*Number(itemInfos[key]['price'])}</td>
             </tr>
             ))
            
           }
+          <h2 style={style1}>
+            Total: {totalCost}
+          </h2>
 
           </tbody>
         </table>

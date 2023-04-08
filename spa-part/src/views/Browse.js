@@ -3,7 +3,7 @@ import Cart from '../components/Cart';
 
 function Browse() {
   let form = new FormData();
-  form.append('get_data', 'items');
+  form.append('get_all_data', 'item');
 
 
   const getItems = () => {

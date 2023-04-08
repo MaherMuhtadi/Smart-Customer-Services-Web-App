@@ -38,7 +38,23 @@ export default function Login(props){
             body: form
         }
         )
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response);
+            return response.json()})
+        .then(data => {
+            if(data){
+                localStorage.setItem("user", JSON.stringify(data));
+                props.setLoginState(true);
+                setRedirectHome(true);
+            }
+            else{
+                alert("Something went wreng...");
+                e.target.reset();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     const handleSignIn = (e) => {
@@ -57,16 +73,18 @@ export default function Login(props){
             if (data){
                 localStorage.setItem("user", JSON.stringify(data))
                 props.setLoginState(true);
+                props.setAdminLoginState(data['admin'] == '1')
                 setRedirectHome(true)
             
                
             }
             else{
-                alert("Wrong Credentials")
+                alert("Wrong Credentials");
                 e.target.reset();
-                console.log("invalid")
+                console.log("invalid");
             }
         })
+        .catch(err => console.log(err))
     }
     if (redirectHome){
          return <Navigate to='/'></Navigate>
