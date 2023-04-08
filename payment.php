@@ -70,7 +70,7 @@ include "admin/connect.php";
                         $result = mysqli_query($connection, "SELECT price, item_name FROM item WHERE item_name = '".$item."'");
                         if (mysqli_num_rows($result) > 0) {
                             $row = mysqli_fetch_assoc($result);
-                            $items = $items."<li>".$item." ".$row["price"]."CAD x".$qty."</li>";
+                            $items = $items."<li>{".$item."} ".$row["price"]."CAD x".$qty."</li>";
                         }
                     }
                     $items = $items."</ul>";

@@ -83,7 +83,7 @@ include "layout.php";
         <strong>Payment Account:</strong> <span class="entry"><?php echo $payment; ?></span><br>
 
         <strong>Items:</strong>
-        <span class="entry"><?php echo $items; ?></span>
+        <span class="entry"><?php echo str_replace("{", "", str_replace("}", "", $items)); ?></span>
 
         <strong>Warehouse:</strong> <span class="entry"><?php echo $source; ?></span><br>
         <strong>Delivery Address:</strong> <span class="entry"><?php echo $destination; ?></span><br>

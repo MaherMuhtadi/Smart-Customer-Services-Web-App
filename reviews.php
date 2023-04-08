@@ -70,14 +70,29 @@ if (isset($_POST["submitted"])) {
             <label for="item_name">Item purchased:</label>
             <select id="item_name" name="item_name">
                 <option selected disabled>Pick an item to review</option>
+                
                 <?php
-                    $result = mysqli_query($connection, "SELECT item_name FROM item");
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='".$row["item_name"]."'>".$row["item_name"]."</option>";
+                    $lists = mysqli_query($connection, "SELECT items, user_id FROM receipt WHERE user_id = '".$_SESSION["user"]["user_id"]."'");
+                    $temp = [];
+                    if (mysqli_num_rows($lists) > 0) {
+                        while ($row = mysqli_fetch_assoc($lists)) {
+                            $temp = array_merge($temp, explode("<li>", $row["items"]));
                         }
                     }
+                    $items = [];
+                    foreach ($temp as $line) {
+                        if (strpos($line, "}") > 0) {
+                            $offset = strpos($line, "{") + 1;
+                            $length = strpos($line, "}") - $offset;
+                            array_push($items, substr($line, $offset, $length));
+                        }
+                    }
+                    $items = array_unique($items);
+                    foreach ($items as $item) {
+                        echo "<option value='$item'>$item</option>";
+                    }
                 ?>
+
             </select>
 
             <label for="rating">Rating:</label>
