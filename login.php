@@ -3,8 +3,9 @@ session_start();
 include "admin/connect.php";
 include "layout.php";
 
-// Sign the user out whenever the user comes to the login page
+// Sign the user out whenever the user comes to the login page and empty their cart
 unset($_SESSION["user"]);
+unset($_SESSION['shopping_cart']);
 
 // If Sign Up button is clicked, add the user info to the database
 if (isset($_POST["signup"])) {
