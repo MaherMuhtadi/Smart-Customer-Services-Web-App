@@ -35,13 +35,20 @@ elseif (isset($_POST["signup"])) {
              "tel_no"=>$_POST["tel_no"],
              "email"=>$_POST["email"],
              "address"=>$_POST["address"],
-             "balance"=>0.00];
+             "balance"=>0.00,
+             "points"=>0,
+             "free_delivery"=>0,
+             "admin"=>0];
+
+    $salt = bin2hex(random_bytes(5)); // 10 chars
+    $password_hash = md5($_POST["password_new"].$salt);
 
     $insert_user = 
-        "INSERT INTO user (login_id, password, first_name, last_name, tel_no, email, address)
+        "INSERT INTO user (login_id, password_hash, salt, first_name, last_name, tel_no, email, address)
             VALUES ('"
             .$user["login_id"]."', '"
-            .$user["password"]."', '"
+            .$password_hash."', '"
+            .$salt."', '"
             .$user["first_name"]."', '"
             .$user["last_name"]."', '"
             .$user["tel_no"]."', '"
@@ -59,38 +66,44 @@ elseif (isset($_POST["signup"])) {
 }
 elseif (isset($_POST["signin"])) {
     unset($_POST["signin"]);
+    $salt_query = "SELECT salt, login_id FROM user WHERE login_id = '".$_POST["login_id"]."'";
+    $salt_result = mysqli_query($connection, $salt_query);
+    $return = json_encode(FALSE);;
+     if (mysqli_num_rows($salt_result) > 0) {
+        while ($salt_row = mysqli_fetch_assoc($salt_result)) {
+            $password_hash = md5($_POST["password"].$salt_row["salt"]);
+
+            $search_user = "SELECT * FROM user WHERE login_id = '".$_POST["login_id"]."' AND password_hash = '$password_hash'";
+            $result = mysqli_query($connection, $search_user);
     
-    $search_user = "SELECT user_id, login_id, password, first_name, last_name, tel_no, email, address, balance
-        FROM user WHERE login_id = '"
-        .$_POST["login_id"]."'"
-        ." AND password = "
-        ."'".$_POST["password"]."'";
-    $result = mysqli_query($connection, $search_user);
-    
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $user = ["user_id"=>$row["user_id"],
+                        "login_id"=>$row["login_id"],
+                        "password"=>$row["password_hash"],
+                        "first_name"=>$row["first_name"],
+                        "last_name"=>$row["last_name"],
+                        "tel_no"=>$row["tel_no"],
+                        "email"=>$row["email"],
+                        "address"=>$row["address"],
+                        "balance"=>$row["balance"],
+                        "points"=>$row["points"],
+                        "free_delivery"=>$row["free_delivery"],
+                        "admin"=>$row["admin"]];
+                $_SESSION["user"] = $user;
+                $return = json_encode($_SESSION['user']);
+            }
+        }
+    }
+    echo $return;
+}
+elseif(isset($_POST['get_all_data'])){
+    $result = mysqli_query($connection, "SELECT * FROM ".$_POST['get_all_data']);
     if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $user = ["user_id"=>$row["user_id"],
-                 "login_id"=>$row["login_id"],
-                 "password"=>$row["password"],
-                 "first_name"=>$row["first_name"],
-                 "last_name"=>$row["last_name"],
-                 "tel_no"=>$row["tel_no"],
-                 "email"=>$row["email"],
-                 "address"=>$row["address"],
-                 "balance"=>$row["balance"]];
-        $_SESSION["user"] = $user;
-        echo json_encode($_SESSION["user"]);
+        echo json_encode(mysqli_fetch_all($result));
     }
     else{
         echo json_encode(FALSE);
-    }
-}
-elseif(isset($_POST['get_data'])){
-    if ($_POST['get_data'] == 'items'){
-        $result = mysqli_query($connection, "SELECT * FROM item");
-        if (mysqli_num_rows($result)>0){
-            echo json_encode(mysqli_fetch_all($result));
-        }
     }
 }
 
