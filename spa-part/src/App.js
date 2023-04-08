@@ -11,6 +11,7 @@ import Delivery from './views/Delivery.js';
 import Login from './views/Login.js';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import Payment from './views/Payment';
 
 export default class App extends React.Component{
   constructor(props){
@@ -21,6 +22,7 @@ export default class App extends React.Component{
     super(props);
     this.state = {
       logged_in: localStorage.getItem('user')?true:false,
+      logged_in_admin: JSON.parse(localStorage.getItem('user'))?JSON.parse(localStorage.getItem('user'))['admin'] == '1':false,
       user: JSON.parse(localStorage.getItem('user')),
       loaded: 1
     }
@@ -43,7 +45,7 @@ componentDidUpdate(prevState){
  
   if (prevState.logged_in != this.state.logged_in){
     if (this.state.logged_in && !this.state.user){
-      this.setState({user: JSON.parse(localStorage.getItem('user'))})
+      this.setState({user: JSON.parse(localStorage.getItem('user'))});
       console.log("User logged in")
     }
     else if (!this.state.logged_in){
@@ -60,6 +62,10 @@ componentDidUpdate(prevState){
    
   }
 
+  setAdminLoginState = (state) => {
+    this.setState(()=>({logged_in_admin: state}))
+  }
+
   render(){
     if (this.state.loaded == 1){
       {console.log(this.state.logged_in)
@@ -67,7 +73,7 @@ componentDidUpdate(prevState){
       return (
        
         <Router>
-          <NavBar loggedIn = {this.state.logged_in} setLoginState = {this.setLoginState}/>
+          <NavBar loggedIn = {this.state.logged_in} setLoginState = {this.setLoginState} loggedInAdmin={this.state.logged_in_admin} setAdminLoginState={this.setAdminLoginState}/>
      
           <Routes>
             <Route path="/" element={<Home user={this.state.user} loggedIn = {this.state.logged_in}/>}/>
@@ -77,7 +83,8 @@ componentDidUpdate(prevState){
             <Route path="/Shopping-cart" element={<ShoppingCart/>}/>
             <Route path='/browse' element={<Browse/>}/>
             <Route path='/delivery' element={<Delivery/>}/>
-            <Route path='/login' element={<Login setLoginState = {this.setLoginState}/>}/>
+            <Route path='/login' element={<Login setLoginState = {this.setLoginState} setAdminLoginState={this.setAdminLoginState}/>}/>
+            <Route path='/payment' element={<Payment/>}/>
             
           </Routes>
           <Footer/>
