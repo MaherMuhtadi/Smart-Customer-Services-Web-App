@@ -4,7 +4,7 @@ export default function MaintainSearch(props) {
  
     const sendFetch = (form, formNum) => {
 
-        fetch('https://localhost/SCC_MaherRepo/Smart-Customer-Services-Web-App/backend/queryDB.php',{
+        fetch('https://localhost/SCC_MaherRepo/Smart-Customer-Services-Web-App/backend/admin.php',{
             method: 'POST',
             body: form
         
