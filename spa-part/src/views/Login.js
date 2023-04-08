@@ -45,6 +45,7 @@ export default function Login(props){
             if(data){
                 localStorage.setItem("user", JSON.stringify(data));
                 props.setLoginState(true);
+                props.setUser(data);
                 setRedirectHome(true);
             }
             else{
@@ -73,6 +74,7 @@ export default function Login(props){
             if (data){
                 localStorage.setItem("user", JSON.stringify(data))
                 props.setLoginState(true);
+                props.setUser(data)
                 props.setAdminLoginState(data['admin'] == '1')
                 setRedirectHome(true)
             

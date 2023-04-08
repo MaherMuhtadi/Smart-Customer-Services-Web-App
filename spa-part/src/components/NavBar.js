@@ -13,11 +13,12 @@ class NavBar extends React.Component {
     };
 
     renderLoginBtn = () => {
-        console.log(this.props.loggedIn);
+        console.log("Within the LoginBtn render: "+this.props.loggedIn);
         if (this.props.loggedIn){
             return (<Link to={"./Login"}>
                 <button onClick={()=>{
                     this.props.setLoginState(false);
+                    this.props.setAdminLoginState(false);
                 }}>Sign Out</button>
 
             </Link>
@@ -29,6 +30,31 @@ class NavBar extends React.Component {
                 <Link to={"./Login"}>
                     <button>Sign In</button>
                 </Link>
+            )
+        }
+    }
+
+    renderAdminBtn = () => {
+        console.log("within render admin"+this.props.loggedInAdmin)
+
+        if (this.props.loggedInAdmin){
+            return (
+                <div className='menu-item'>
+                    <div id='admin-dropdown'>
+                        <button style={this.style2}>Maintain</button>
+                        <div id='admin-dropdown-menu'>
+                            <Link to={"./Insert"}>
+                                <button>Insert</button>
+                            </Link>
+                            <Link to={"./Search"}>
+                                <button>Search</button>
+                            </Link>
+                            <Link to={"./Edit"}>
+                                <button>Edit</button>
+                            </Link>
+                        </div>
+                    </div>
+                    </div>
             )
         }
     }
@@ -77,9 +103,10 @@ class NavBar extends React.Component {
                             </Link>
                         </div>
                     </div>
-                  
+
                     </div>
 
+                    {this.renderAdminBtn()}
                     {this.renderLoginBtn()}
 
             </div>

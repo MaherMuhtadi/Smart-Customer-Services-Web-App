@@ -12,6 +12,7 @@ import Login from './views/Login.js';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Payment from './views/Payment';
+import MaintainInsert from './views/MaintainInsert';
 
 export default class App extends React.Component{
   constructor(props){
@@ -44,11 +45,7 @@ componentDidUpdate(prevState){
    */
  
   if (prevState.logged_in != this.state.logged_in){
-    if (this.state.logged_in && !this.state.user){
-      this.setState({user: JSON.parse(localStorage.getItem('user'))});
-      console.log("User logged in")
-    }
-    else if (!this.state.logged_in){
+    if (!this.state.logged_in){
       localStorage.removeItem('user');
       localStorage.removeItem('shopping_cart');
       console.log("User logged out")
@@ -60,6 +57,10 @@ componentDidUpdate(prevState){
   setLoginState = (state) => {
     this.setState(() => ({logged_in: state}));
    
+  }
+
+  setUser = (current_user) => {
+    this.setState(()=>({user: current_user}))
   }
 
   setAdminLoginState = (state) => {
@@ -83,8 +84,10 @@ componentDidUpdate(prevState){
             <Route path="/Shopping-cart" element={<ShoppingCart/>}/>
             <Route path='/browse' element={<Browse/>}/>
             <Route path='/delivery' element={<Delivery/>}/>
-            <Route path='/login' element={<Login setLoginState = {this.setLoginState} setAdminLoginState={this.setAdminLoginState}/>}/>
+            <Route path='/login' element={<Login setLoginState = {this.setLoginState} setAdminLoginState={this.setAdminLoginState}
+              setUser={this.setUser}/>}/>
             <Route path='/payment' element={<Payment/>}/>
+            <Route path='/insert' element={<MaintainInsert/>}/>
             
           </Routes>
           <Footer/>

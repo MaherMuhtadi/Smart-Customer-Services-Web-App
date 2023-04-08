@@ -99,10 +99,7 @@ export default class Cart extends React.Component {
     
                 <br/>
             <button className="negative-button" onClick={this.clearCart}>Clear</button>
-                    <Link to={'/Shopping-cart'}>
-                        <button>Checkout</button>
-
-                    </Link>
+            <Link to={'/Shopping-cart'}><button>Go</button></Link>
         </div>
         )
     }
