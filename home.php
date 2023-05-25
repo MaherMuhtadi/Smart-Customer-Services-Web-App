@@ -70,8 +70,6 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
                     echo "<p>Your current balance is ".$user["balance"]." CAD</p>";
                     echo "<p>You earned ".$user["points"]." Reward Points</p>";
                 }
-
-                echo "<p style='font-size:small'>Your Browser: ".browserDetect()."</p>";
             ?>
         </div>
 
@@ -92,7 +90,7 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
         <h2>Reward Points</h2>
         <p>SCS also has a rewards system in place for you! You can earn 1 Reward Point for every 
         dollar you spend with us! What can you do with your Reward Points? For just 100 Reward Points, 
-        you can place your next order for no additional delivery charges! Make sure to claim you free
+        you can place your next order for no additional delivery charges! Make sure to claim your free
         delivery before your next purchase.</p>
     </main>
 
