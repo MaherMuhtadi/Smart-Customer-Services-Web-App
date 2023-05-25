@@ -44,8 +44,6 @@ function menuBar() {
 
             <div id='menu-row'>
                 <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
-                <button class='menu-item' onclick=\"window.open('about.php', '_self')\">About us</button>
-                <button class='menu-item' onclick=\"window.open('contact.php', '_self')\">Contact us</button>
                 <button class='menu-item' onclick=\"window.open('orders.php', '_self')\">My Orders</button>
                 <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
                 
@@ -83,25 +81,8 @@ function footer() {
      */
     echo
         "<footer>
-            <div class='footer-item'>
-                Our Team:
-                <ul>
-                    <li>Maher Muhtadi</li>
-                    <li>Edward Sword</li>
-                    <li>Arshpreet Singh</li>
-                    <li>James Tan</li>
-                </ul>
-            </div>
-            
-            <div class='footer-item'>
-                Contacts:
-                <ul>
-                    <li>mmuhtadi@torontomu.ca</li>
-                    <li>edward.sword@torontomu.ca</li>
-                    <li>arshpreet.singh@torontomu.ca</li>
-                    <li>russelljames.tan@torontomu.ca</li>
-                </ul>
-            </div>
+            Source code on <a href='https://github.com/MaherMuhtadi/Smart-Customer-Services-Web-App' target='_blank'>GitHub</a><br>
+            &#169 <script>document.write((new Date).getFullYear())</script> Maher Muhtadi &amp; James Tan
         </footer>";
 }
 
