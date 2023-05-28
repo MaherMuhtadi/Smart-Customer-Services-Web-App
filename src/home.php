@@ -39,7 +39,6 @@ if (isset($_POST["claim"]) and isset($_SESSION["user"])) {
     <?php menuBar(); ?>
     
     <main>
-        <h1>Testing</h1>
         <?php
             if (isset($_SESSION["user"])) {
                 $user = $_SESSION["user"];
