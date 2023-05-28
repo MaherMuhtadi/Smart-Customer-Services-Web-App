@@ -1,9 +1,9 @@
 <?php
 // credentials
-$hostname = "localhost";
+$hostname = getenv("MYSQL_HOSTNAME");
 $username = "root";
-$password = "";
-$database = "SCS";
+$password = getenv("MYSQL_PASSWORD");
+$database = getenv("MYSQL_DATABASE");
 
 // create a connection
 $connection = mysqli_connect($hostname, $username, $password, $database);
