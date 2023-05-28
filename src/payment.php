@@ -5,7 +5,7 @@ if (!isset($_SESSION["user"])) {
     exit();
 }
 elseif (count($_GET) == 0 or !isset($_SESSION["shopping_cart"])) {
-    header("Location: home.php");
+    header("Location: index.php");
     exit();
 }
 

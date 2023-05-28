@@ -29,7 +29,7 @@ $create_commands = file_get_contents("tables.sql");
 try {
     mysqli_multi_query($connection, $create_commands);
     echo "All new tables were created successfully.<br>";
-    echo "<a href='../home.php'>Homepage</a>";
+    echo "<a href='../index.php'>Homepage</a>";
 }
 catch (Exception $e) {
     echo "No tables created.";

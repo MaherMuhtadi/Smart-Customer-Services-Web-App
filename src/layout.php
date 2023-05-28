@@ -43,7 +43,7 @@ function menuBar() {
             <img style='width: 15%' src='images/logo.png' alt='logo'>
 
             <div id='menu-row'>
-                <button class='menu-item' onclick=\"window.open('home.php', '_self')\">Home</button>
+                <button class='menu-item' onclick=\"window.open('index.php', '_self')\">Home</button>
                 <button class='menu-item' onclick=\"window.open('orders.php', '_self')\">My Orders</button>
                 <button class='menu-item' onclick=\"window.open('reviews.php', '_self')\">Reviews</button>
                 

@@ -16,7 +16,7 @@ if (mysqli_num_rows($result) > 0) {
     $receipt = mysqli_fetch_assoc($result);
     
     if ($receipt["user_id"] != $user_id) {
-        header("Location: home.php");
+        header("Location: index.php");
         exit();
     }
     
@@ -44,7 +44,7 @@ if (mysqli_num_rows($result) > 0) {
     $subtotal = $total_price-$delivery_fee;
 }
 else {
-    header("Location: home.php");
+    header("Location: index.php");
     exit();
 }
 

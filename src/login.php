@@ -49,7 +49,7 @@ if (isset($_POST["signup"])) {
             header("Location: ".$_POST["previous_page"]);
             exit();
         }
-        header("Location: home.php");
+        header("Location: index.php");
         exit();
     }
 }
@@ -87,7 +87,7 @@ elseif (isset($_POST["signin"])) {
                     header("Location: ".$_POST["previous_page"]);
                     exit();
                 }
-                header("Location: home.php");
+                header("Location: index.php");
                 exit();
             }
         }
@@ -131,7 +131,7 @@ elseif (isset($_POST["signin"])) {
                     echo "<button onclick=\"window.open('".$_SERVER['HTTP_REFERER']."', '_self')\">Back</button>";
                 }
             ?>
-            <button onclick="window.open('home.php', '_self')">Home</button>
+            <button onclick="window.open('index.php', '_self')">Home</button>
         </div>
     </header>
 
